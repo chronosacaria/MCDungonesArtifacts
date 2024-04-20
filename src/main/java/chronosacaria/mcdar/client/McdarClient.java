@@ -16,9 +16,9 @@ public class McdarClient implements ClientModInitializer {
     @SuppressWarnings({"deprecation", "Note: ResourceManagerHelper.registerBuiltinResourcePack isn't actually deprecated, but overloaded."})
     private static void loadOptionalResourcePack(ModContainer modContainer) {
         ResourceManagerHelper.registerBuiltinResourcePack(
-                new Identifier(Mcdar.MOD_ID, "3dmcdar"),
+                new Identifier(Mcdar.MOD_ID, "2dmcdar"),
                 modContainer,
-                "3D MCDAR",
+                "Legacy MCDAR",
                 ResourcePackActivationType.NORMAL);
     }
 

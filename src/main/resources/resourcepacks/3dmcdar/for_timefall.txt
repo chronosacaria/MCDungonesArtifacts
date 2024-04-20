@@ -1,4 +1,0 @@
-As stated on PMC, this pack uses optifine/sodium and continuity.
-So you might want to mention that on the mod page whenever you get to that.
-
-also, thanks for using my models :)
