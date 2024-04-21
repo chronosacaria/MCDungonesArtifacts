@@ -16,7 +16,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.world.World;
 
 import java.util.List;
-import java.util.Random;
 
 public class EnchantedGrassItem extends ArtifactSummoningItem{
     public EnchantedGrassItem() {
@@ -33,7 +32,7 @@ public class EnchantedGrassItem extends ArtifactSummoningItem{
 
             if (itemUsageContextPlayer != null) {
 
-                int effectInt = (new Random()).nextInt(3);
+                int effectInt = CleanlinessHelper.RANDOM.nextInt(3);
                 SheepEntity sheep = SummoningHelper.SHEEP.get(effectInt).create(serverWorld);
 
                 if (SummoningHelper.mcdar$summonSummonableEntity(sheep, itemUsageContextPlayer, itemUsageContext.getBlockPos())) {

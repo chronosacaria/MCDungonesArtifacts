@@ -23,7 +23,6 @@ import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
 import java.util.List;
-import java.util.Random;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -138,14 +137,14 @@ public class AOEHelper {
         for (
                 zRatio = user.getZ() - nearbyEntity.getZ();
                 xRatio * xRatio + zRatio < 1.0E-4D;
-                zRatio = (Math.random() - Math.random()) * 0.01D) {
-            xRatio = (Math.random() - Math.random()) * 0.01D;
+                zRatio = (CleanlinessHelper.RANDOM.nextDouble() - CleanlinessHelper.RANDOM.nextDouble()) * 0.01D) {
+            xRatio = (CleanlinessHelper.RANDOM.nextDouble() - CleanlinessHelper.RANDOM.nextDouble()) * 0.01D;
         }
         nearbyEntity.takeKnockback(0.4F * knockbackMultiplier, xRatio, zRatio);
     }
 
     public static void satchelOfElementsEffects(PlayerEntity user) {
-        int effectInt = (new Random()).nextInt(3);
+        int effectInt = (CleanlinessHelper.RANDOM.nextInt(3));
 
         if (effectInt == 0){ // BURNING
             for (LivingEntity nearbyEntity : getEntitiesByPredicate(user, 5,

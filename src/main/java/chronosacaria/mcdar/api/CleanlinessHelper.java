@@ -22,15 +22,16 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.random.Random;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
 public class CleanlinessHelper {
 
-    static final Random RANDOM = new Random();
+    @SuppressWarnings("deprecation")
+    public static final net.minecraft.util.math.random.Random RANDOM = Random.createThreadSafe();
 
     public static void playCenteredSound(LivingEntity center, SoundEvent soundEvent, float volume, float pitch) {
         playCenteredSound(center, soundEvent, SoundCategory.PLAYERS, volume, pitch);

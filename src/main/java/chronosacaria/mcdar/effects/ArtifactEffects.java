@@ -14,8 +14,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvents;
 
-import java.util.Random;
-
 public class ArtifactEffects {
     private static final float EXPLOSION_RADIUS = 3.0F;
 
@@ -55,7 +53,7 @@ public class ArtifactEffects {
                 (nearbyEntity) -> AbilityHelper.isPetOf(nearbyEntity, user))){
             StatusEffect[] statuses = {StatusEffects.HASTE, StatusEffects.STRENGTH, StatusEffects.SPEED};
             StatusEffectInstance statusEffectInstance =
-                    new StatusEffectInstance(statuses[new Random().nextInt(statuses.length)], 100, 2);
+                    new StatusEffectInstance(statuses[CleanlinessHelper.RANDOM.nextInt(statuses.length)], 100, 2);
             nearbyEntity.addStatusEffect(statusEffectInstance);
         }
     }
