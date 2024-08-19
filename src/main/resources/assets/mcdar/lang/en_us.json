@@ -48,6 +48,12 @@
   "effect.mcdar.shielding":                               "Shielding",
   "effect.mcdar.soul_protection":                         "Soul Protection",
   "effect.mcdar.stunned":                                 "Stunned",
+  "effect.mcdar.chrmed":                                  "Charmed",
+  
+  "effect.mcdar.shielding.description":                   "Protects you against all projectiles, similar to a Shield. \n\nThis effect is obtained by standing in a lingering cloud of Shielding created by a Totem of Shielding."
+  "effect.mcdar.soul_protection.description":             "Shields you against all forms of lethal damage, similar to a Totem of Undying. When taking a lethal blow, the effect will instead prevent death and provide Absorption II, Regeneration II, and Fire Resistance II. \n\nThis effect is obtained by standing in a lingering cloud of Soul Protection created by a Totem of Soul Protection."
+  "effect.mcdar.stunned.description":                     "Completely freezes the acceleration and animation of mobs; and disables most actions, including attacking and picking up items. \n\nSome mobs can resist the effect: Witches will still be able to drink potions and players will still be able to drop items."
+  "effect.mcdar.charmed.description":                     "Inflicted neutral and hostile mobs will seek out other entities to attack. \n\nCharmed entities can attack each other, and they may also attack their inflicter. Once the effect expires, the entity will take damage. \n\nThis effect can only be inflicted onto entities."
 
   "enchantment.mcdar.beast_boss":                         "Beast Boss",
   "enchantment.mcdar.beast_burst":                        "Beast Burst",
