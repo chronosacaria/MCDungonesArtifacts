@@ -3,6 +3,9 @@
   "effect": "mcdar:stunned",
   "providers": [
     {
+      "item": "mcdar:satchel_of_elements"
+    },
+    {
       "item": "mcdar:shock_powder"
     }
   ],
