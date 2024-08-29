@@ -1,9 +1,10 @@
 {
+  "replace": false,
   "type": "jeed:effect_provider",
-  "effect": "mcdar:stunned",
+  "effect": "minecraft:invisibility",
   "providers": [
     {
-      "item": "mcdar:shock_powder"
+      "item": "mcdar:ghost_cloak"
     }
   ],
   "fabric:load_conditions": [
