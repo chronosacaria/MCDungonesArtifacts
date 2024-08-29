@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "type": "jeed:effect_provider",
+  "effect": "minecraft:resistance",
+  "providers": [
+    {
+      "item": "mcdar:ghost_cloak"
+    },
+	{
+      "item": "mcdar:iron_hide_amulet"
+    },
+	{
+	  "item": "mcdar:gong_of_weakening"
+	}
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "jeed"
+      ]
+    }
+  ]
+}

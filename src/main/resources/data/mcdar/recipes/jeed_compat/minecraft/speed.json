@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "type": "jeed:effect_provider",
+  "effect": "minecraft:speed",
+  "providers": [
+    {
+      "item": "mcdar:boots_of_swiftness"
+    },
+	{
+      "item": "mcdar:death_cap_mushroom"
+    },
+	{
+      "item": "mcdar:enchanted_grass"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "jeed"
+      ]
+    }
+  ]
+}
