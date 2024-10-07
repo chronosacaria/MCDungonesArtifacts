@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "mcdar",
+  "version": "${version}",
+  "name": "MC Dungeons Artifacts",
+  "description": "Bringing the artifacts of Minecraft Dungeons to Minecraft",
+  "authors": [
+    "Chronosacaria",
+    "Kluzzio",
+    "SeaOfPixels (Art)",
+    "SattesKrokodil (Art)",
+    "Patreons (Support)"
+  ],
+  "contact": {},
+  "license": "Timefall Development License 1.2",
+  "icon": "assets/mcdar/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dev.timefall.mcdar.McdarFabric"
+    ]
+  },
+  "mixins": [
+    "mcdar.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "fabric-api": "*",
+    "minecraft": "~1.21"
+   }
+}

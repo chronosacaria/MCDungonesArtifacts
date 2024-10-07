@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.timefall.mcdar.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "BowItemMixin",
+    "CreeperEntityAccessor",
+    "DefaultAttributeRegistryAccessor",
+    "ItemStackMixin",
+    "LivingEntityMixin",
+    "MobEntityAccessor",
+    "MobEntityMixin",
+    "PersistentProjectileEntityMixin",
+    "PlayerEntityMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

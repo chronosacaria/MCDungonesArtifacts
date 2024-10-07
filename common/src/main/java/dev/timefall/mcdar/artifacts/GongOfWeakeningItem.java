@@ -1,0 +1,60 @@
+package dev.timefall.mcdar.artifacts;
+
+import dev.timefall.mcdar.api.AOEHelper;
+import dev.timefall.mcdar.api.CleanlinessHelper;
+import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
+import dev.timefall.mcdar.enums.StatusInflictingArtifactID;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.world.World;
+
+import java.util.List;
+
+
+public class GongOfWeakeningItem extends ArtifactStatusInflictingItem{
+    public GongOfWeakeningItem() {
+        super(
+                StatusInflictingArtifactID.GONG_OF_WEAKENING,
+                McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getDurability()
+        );
+    }
+
+    public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
+        ItemStack itemStack = user.getStackInHand(hand);
+        float range = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getInnerStat().mcdar$getRange();
+        int duration = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getInnerStat().mcdar$getDuration();
+        int amplifier = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getInnerStat().mcdar$getAmplifier();
+        int amplifier2 = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getInnerStat().mcdar$getAmplifier2();
+        int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getMaxCooldownEnchantmentTime();
+
+        CleanlinessHelper.playCenteredSound(user, SoundEvents.BLOCK_BELL_USE, SoundCategory.BLOCKS, 2.0F, 1.0F);
+        CleanlinessHelper.playCenteredSound(user, SoundEvents.BLOCK_BELL_RESONATE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+        AOEHelper.afflictNearbyEntities(user, range, new StatusEffectInstance(StatusEffects.WEAKNESS, duration, amplifier),
+                new StatusEffectInstance(StatusEffects.RESISTANCE, duration, amplifier2));
+
+        if (!user.isCreative()){
+            EquipmentSlot equipmentSlot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+            itemStack.damage(1, user, equipmentSlot);
+        }
+
+
+        user.getItemCooldownManager().set(this, maxCooldownEnchantmentTime);
+        return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, TooltipContext tooltipContext, List<Text> tooltip, TooltipType type){
+        CleanlinessHelper.createLoreTTips(stack, tooltip);
+    }
+}
