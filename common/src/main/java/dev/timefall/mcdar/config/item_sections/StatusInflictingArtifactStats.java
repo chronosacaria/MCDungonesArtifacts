@@ -18,7 +18,7 @@ public class StatusInflictingArtifactStats  extends ConfigSection {
                 100,
                 2,
                 1,
-                villager,
+                illager,
                 dungeon
         );
         this.GONG_OF_WEAKENING_STATS = new ComplexArtifactStats<>(
@@ -26,10 +26,10 @@ public class StatusInflictingArtifactStats  extends ConfigSection {
                 true,
                 true,
                 64,
-                120,
+                100,
                 2,
                 1,
-                villager,
+                illager,
                 dungeon
         );
         this.LOVE_MEDALLION_STATS = new ComplexArtifactStats<>(
@@ -40,7 +40,7 @@ public class StatusInflictingArtifactStats  extends ConfigSection {
                 120,
                 2,
                 1,
-                villager,
+                illager,
                 dungeon
         );
         this.SATCHEL_OF_ELEMENTS_STATS = new ComplexArtifactStats<>(
@@ -48,10 +48,10 @@ public class StatusInflictingArtifactStats  extends ConfigSection {
                 true,
                 true,
                 64,
-                120,
+                60,
                 2,
                 1,
-                villager,
+                illager,
                 dungeon
         );
         this.SHOCK_POWDER_STATS = new ComplexArtifactStats<>(
@@ -59,10 +59,10 @@ public class StatusInflictingArtifactStats  extends ConfigSection {
                 true,
                 true,
                 64,
-                120,
+                300,
                 2,
                 1,
-                villager,
+                illager,
                 dungeon
         );
     }

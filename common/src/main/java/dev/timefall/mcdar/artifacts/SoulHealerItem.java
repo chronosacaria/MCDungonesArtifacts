@@ -3,9 +3,8 @@ package dev.timefall.mcdar.artifacts;
 import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
-import dev.timefall.mcdar.api.McdarEnchantmentHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.DefensiveArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -22,7 +21,6 @@ import java.util.List;
 public class SoulHealerItem extends ArtifactDefensiveItem{
     public SoulHealerItem() {
         super(
-                DefensiveArtifactID.SOUL_HEALER,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SOUL_HEALER_STATS.mcdar$getDurability()
         );
     }
@@ -30,6 +28,7 @@ public class SoulHealerItem extends ArtifactDefensiveItem{
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         int experienceDrain = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SOUL_HEALER_STATS.mcdar$getInnerStat().mcdar$getExperienceDrain();
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SOUL_HEALER_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
         float range = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SOUL_HEALER_STATS.mcdar$getInnerStat().mcdar$getRange();
 
         ItemStack itemStack = user.getStackInHand(hand);
@@ -48,12 +47,12 @@ public class SoulHealerItem extends ArtifactDefensiveItem{
                     EquipmentSlot equipmentSlot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
 
                     itemStack.damage(1, user, equipmentSlot);
-                    McdarEnchantmentHelper.mcdar$cooldownHelper(
+                    EnchantmentEffects.mcdar$cooldownHelper(
                             user,
                             this,
                             bl
                                     ? 20
-                                    : maxCooldownEnchantmentTime
+                                    : modifiedCooldownEnchantmentTime
                     );
                 }
             }

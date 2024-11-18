@@ -2,7 +2,7 @@ package dev.timefall.mcdar.mixin;
 
 import dev.timefall.mcdar.api.ProjectileEffectHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.QuiverArtifactID;
+import dev.timefall.mcdar.registry.ArtifactsRegistry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
@@ -19,7 +19,7 @@ public abstract class BowItemMixin {
     @Inject(method = "shoot", at = @At(value = "HEAD"))
     public void onFlamingQuiverArrowLoosing(LivingEntity shooter, ProjectileEntity projectile, int index, float speed, float divergence, float yaw, LivingEntity target, CallbackInfo ci){
         if (McdarArtifactsStatsConfig.CONFIG.mcdar$getQuiverArtifactStats().FLAMING_QUIVER_STATS.mcdar$getIsEnabled()){
-            if (shooter.getOffHandStack().isOf(QuiverArtifactID.FLAMING_QUIVER.mcdar$getItem())) {
+            if (shooter.getOffHandStack().isOf(ArtifactsRegistry.FLAMING_QUIVER)) {
                 if (shooter instanceof PlayerEntity playerEntity) {
                     float effectTimer = playerEntity.getItemCooldownManager().getCooldownProgress(shooter.getOffHandStack().getItem(), 0);
                     if (effectTimer > 0) {

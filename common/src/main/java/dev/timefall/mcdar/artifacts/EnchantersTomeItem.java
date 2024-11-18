@@ -3,7 +3,7 @@ package dev.timefall.mcdar.artifacts;
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
 import dev.timefall.mcdar.effects.ArtifactEffects;
-import dev.timefall.mcdar.enums.DefensiveArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -19,7 +19,6 @@ import java.util.List;
 public class EnchantersTomeItem extends ArtifactDefensiveItem{
     public EnchantersTomeItem() {
         super(
-                DefensiveArtifactID.ENCHANTERS_TOME,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().ENCHANTERS_TOME_STATS.mcdar$getDurability()
         );
     }
@@ -28,6 +27,7 @@ public class EnchantersTomeItem extends ArtifactDefensiveItem{
         ItemStack itemStack = user.getStackInHand(hand);
 
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().ENCHANTERS_TOME_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
         ArtifactEffects.enchantersTomeEffects(user);
 
@@ -37,7 +37,7 @@ public class EnchantersTomeItem extends ArtifactDefensiveItem{
         }
 
 
-        user.getItemCooldownManager().set(this, maxCooldownEnchantmentTime);
+        user.getItemCooldownManager().set(this, modifiedCooldownEnchantmentTime);
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

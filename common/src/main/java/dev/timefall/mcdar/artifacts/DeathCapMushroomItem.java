@@ -2,7 +2,7 @@ package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.AgilityArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -17,7 +17,6 @@ import java.util.List;
 public class DeathCapMushroomItem extends ArtifactAgilityItem{
     public DeathCapMushroomItem() {
         super(
-                AgilityArtifactID.DEATH_CAP_MUSHROOM,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getDurability()
         );
     }
@@ -27,12 +26,13 @@ public class DeathCapMushroomItem extends ArtifactAgilityItem{
         int amplifier = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getInnerStat().mcdar$getAmplifier();
         int amplifier2 = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getInnerStat().mcdar$getAmplifier2();
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
         return CleanlinessHelper.mcdar$cleanUseWithOptionalStatus(
                 user,
                 hand,
                 this,
-                maxCooldownEnchantmentTime,
+                modifiedCooldownEnchantmentTime,
                 StatusEffects.HASTE,
                 duration,
                 amplifier,

@@ -3,8 +3,7 @@ package dev.timefall.mcdar.mixin;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
 import dev.timefall.mcdar.effects.ArtifactEffects;
 import dev.timefall.mcdar.effects.EnchantmentEffects;
-import dev.timefall.mcdar.enchants.EnchantmentsID;
-import dev.timefall.mcdar.registries.StatusEffectRegistry;
+import dev.timefall.mcdar.registry.StatusEffectRegistry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Tameable;
 import net.minecraft.entity.damage.DamageSource;
@@ -64,8 +63,8 @@ public class LivingEntityMixin {
         if (source.getSource() instanceof Tameable summonedEntity) {
             if (source.getSource().getWorld() instanceof ServerWorld serverWorld) {
 
-                if (McdarCommon.CONFIG.mcdarEnchantmentsConfig.ENCHANTMENT_CONFIG.get(EnchantmentsID.BEAST_BOSS).mcdar$getIsEnabled())
-                    amount *= EnchantmentEffects.beastBossDamage(summonedEntity, serverWorld);
+                //if (McdarCommon.CONFIG.mcdarEnchantmentsConfig.ENCHANTMENT_CONFIG.get(EnchantmentIds.BEAST_BOSS).mcdar$getIsEnabled())
+                amount *= EnchantmentEffects.beastBossDamage(summonedEntity, serverWorld);
 
             }
         }
@@ -77,12 +76,12 @@ public class LivingEntityMixin {
 
         if (!((Object) this instanceof PlayerEntity player)) return;
 
-        if (player.isAlive() && player.getWorld() instanceof ServerWorld) {
+        if (player.isAlive() && player.getWorld() instanceof ServerWorld serverWorld) {
 
-            if (McdarCommon.CONFIG.mcdarEnchantmentsConfig.ENCHANTMENT_CONFIG.get(EnchantmentsID.BEAST_BURST).mcdar$getIsEnabled())
-                EnchantmentEffects.activateBeastBurst(player);
-            if (McdarCommon.CONFIG.mcdarEnchantmentsConfig.ENCHANTMENT_CONFIG.get(EnchantmentsID.BEAST_SURGE).mcdar$getIsEnabled())
-                EnchantmentEffects.activateBeastSurge(player);
+            //if (McdarCommon.CONFIG.mcdarEnchantmentsConfig.ENCHANTMENT_CONFIG.get(EnchantmentIds.BEAST_BURST).mcdar$getIsEnabled())
+                EnchantmentEffects.activateBeastBurst(player, serverWorld);
+            //if (McdarCommon.CONFIG.mcdarEnchantmentsConfig.ENCHANTMENT_CONFIG.get(EnchantmentIds.BEAST_SURGE).mcdar$getIsEnabled())
+                EnchantmentEffects.activateBeastSurge(player, serverWorld);
         }
     }
 }

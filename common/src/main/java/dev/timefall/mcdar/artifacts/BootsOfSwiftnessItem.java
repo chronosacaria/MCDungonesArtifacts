@@ -2,7 +2,7 @@ package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.AgilityArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -17,7 +17,6 @@ import java.util.List;
 public class BootsOfSwiftnessItem extends ArtifactAgilityItem{
     public BootsOfSwiftnessItem() {
         super(
-                AgilityArtifactID.BOOTS_OF_SWIFTNESS,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().BOOTS_OF_SWIFTNESS_STATS.mcdar$getDurability()
         );
     }
@@ -26,12 +25,13 @@ public class BootsOfSwiftnessItem extends ArtifactAgilityItem{
         int duration = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().BOOTS_OF_SWIFTNESS_STATS.mcdar$getInnerStat().mcdar$getDuration();
         int amplifier = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().BOOTS_OF_SWIFTNESS_STATS.mcdar$getInnerStat().mcdar$getAmplifier();
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().BOOTS_OF_SWIFTNESS_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
         return CleanlinessHelper.mcdar$cleanUseWithOptionalStatus(
                 user,
                 hand,
                 this,
-                maxCooldownEnchantmentTime,
+                modifiedCooldownEnchantmentTime,
                 StatusEffects.SPEED,
                 duration,
                 amplifier,

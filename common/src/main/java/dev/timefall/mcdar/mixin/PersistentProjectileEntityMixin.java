@@ -4,8 +4,8 @@ import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.api.ProjectileEffectHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.QuiverArtifactID;
-import dev.timefall.mcdar.registries.StatusEffectRegistry;
+import dev.timefall.mcdar.registry.ArtifactsRegistry;
+import dev.timefall.mcdar.registry.StatusEffectRegistry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
@@ -36,10 +36,10 @@ public class PersistentProjectileEntityMixin {
                 if (CleanlinessHelper.isCoolingDown(shooter, offhand.getItem())) {
 
                     if (McdarArtifactsStatsConfig.CONFIG.mcdar$getQuiverArtifactStats().THUNDERING_QUIVER_STATS.mcdar$getIsEnabled())
-                        if (offhand.isOf(QuiverArtifactID.THUNDERING_QUIVER.mcdar$getItem()))
+                        if (offhand.isOf(ArtifactsRegistry.THUNDERING_QUIVER))
                             AOEHelper.electrocute(livingEntity, (float) persistentProjectileEntity.getDamage());
                     if (McdarArtifactsStatsConfig.CONFIG.mcdar$getQuiverArtifactStats().TORMENT_QUIVER_STATS.mcdar$getIsEnabled())
-                        if (offhand.isOf(QuiverArtifactID.TORMENT_QUIVER.mcdar$getItem())) {
+                        if (offhand.isOf(ArtifactsRegistry.TORMENT_QUIVER)) {
 
                             // TODO: There's gotta be a better way to do this
                             double d = Math.max(0.0, 1.0 - livingEntity.getAttributeValue(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE));
@@ -69,7 +69,7 @@ public class PersistentProjectileEntityMixin {
             if (ppe.getOwner() instanceof PlayerEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 
-                if (offhand.isOf(QuiverArtifactID.TORMENT_QUIVER.mcdar$getItem())) {
+                if (offhand.isOf(ArtifactsRegistry.TORMENT_QUIVER)) {
                     if (CleanlinessHelper.isCoolingDown(shooter, offhand.getItem())) {
                         if (ci.isCancellable()) {
                             ci.cancel();
@@ -88,7 +88,7 @@ public class PersistentProjectileEntityMixin {
             if (ppe.getOwner() instanceof PlayerEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 
-                if (offhand.isOf(QuiverArtifactID.HARPOON_QUIVER.mcdar$getItem())) {
+                if (offhand.isOf(ArtifactsRegistry.HARPOON_QUIVER)) {
                     if (CleanlinessHelper.isCoolingDown(shooter, offhand.getItem())) {
                         if (ppe.isTouchingWater()) {
                             float normDrag = cir.getReturnValueF();

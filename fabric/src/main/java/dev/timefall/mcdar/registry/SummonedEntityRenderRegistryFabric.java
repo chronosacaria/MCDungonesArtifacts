@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 
 @Environment(EnvType.CLIENT)
 public class SummonedEntityRenderRegistryFabric {
-    public static void init(){
+    public static void register(){
         EntityRendererRegistry.register(SummonedEntityRegistryFabric.BUZZY_NEST_BEE_ENTITY, BuzzyNestBeeRenderer::new);
         EntityRendererRegistry.register(SummonedEntityRegistryFabric.ENCHANTED_GRASS_BLUE_SHEEP_ENTITY, EnchantedGrassBlueSheepRenderer::new);
         EntityRendererRegistry.register(SummonedEntityRegistryFabric.ENCHANTED_GRASS_GREEN_SHEEP_ENTITY, EnchantedGrassGreenSheepRenderer::new);

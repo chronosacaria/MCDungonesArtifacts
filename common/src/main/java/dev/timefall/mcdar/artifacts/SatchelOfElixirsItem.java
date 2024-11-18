@@ -2,9 +2,8 @@ package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
-import dev.timefall.mcdar.api.McdarEnchantmentHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.DefensiveArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -20,7 +19,6 @@ import java.util.List;
 public class SatchelOfElixirsItem extends ArtifactDefensiveItem {
     public SatchelOfElixirsItem() {
         super(
-                DefensiveArtifactID.SATCHEL_OF_ELIXIRS,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SATCHEL_OF_ELIXIRS_STATS.mcdar$getDurability()
         );
     }
@@ -28,6 +26,8 @@ public class SatchelOfElixirsItem extends ArtifactDefensiveItem {
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SATCHEL_OF_ELIXIRS_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
+
         ItemStack potionToDrop =
                 AbilityHelper.SATCHEL_OF_ELIXIRS_LIST.get(user.getRandom().nextInt(AbilityHelper.SATCHEL_OF_ELIXIRS_LIST.size()));
 
@@ -38,10 +38,10 @@ public class SatchelOfElixirsItem extends ArtifactDefensiveItem {
             itemStack.damage(1, user, equipmentSlot);
         }
 
-        McdarEnchantmentHelper.mcdar$cooldownHelper(
+        EnchantmentEffects.mcdar$cooldownHelper(
                 user,
                 this,
-                maxCooldownEnchantmentTime
+                modifiedCooldownEnchantmentTime
         );
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);

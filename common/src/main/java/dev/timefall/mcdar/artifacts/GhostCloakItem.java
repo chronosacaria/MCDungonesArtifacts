@@ -2,7 +2,7 @@ package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.AgilityArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -17,7 +17,6 @@ import java.util.List;
 public class GhostCloakItem extends ArtifactAgilityItem{
     public GhostCloakItem() {
         super(
-                AgilityArtifactID.GHOST_CLOAK,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().GHOST_CLOAK_STATS.mcdar$getDurability()
         );
     }
@@ -29,12 +28,13 @@ public class GhostCloakItem extends ArtifactAgilityItem{
         int amplifier2 = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().GHOST_CLOAK_STATS.mcdar$getInnerStat().mcdar$getAmplifier2();
         int amplifier3 = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().GHOST_CLOAK_STATS.mcdar$getInnerStat().mcdar$getAmplifier3();
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().GHOST_CLOAK_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
         return CleanlinessHelper.mcdar$cleanUseWithOptionalStatus(
                 user,
                 hand,
                 this,
-                maxCooldownEnchantmentTime,
+                modifiedCooldownEnchantmentTime,
                 StatusEffects.INVISIBILITY,
                 duration,
                 amplifier,

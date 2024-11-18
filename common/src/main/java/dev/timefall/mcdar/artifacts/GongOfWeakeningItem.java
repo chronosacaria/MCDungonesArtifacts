@@ -3,7 +3,7 @@ package dev.timefall.mcdar.artifacts;
 import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.StatusInflictingArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -24,7 +24,6 @@ import java.util.List;
 public class GongOfWeakeningItem extends ArtifactStatusInflictingItem{
     public GongOfWeakeningItem() {
         super(
-                StatusInflictingArtifactID.GONG_OF_WEAKENING,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getDurability()
         );
     }
@@ -36,6 +35,7 @@ public class GongOfWeakeningItem extends ArtifactStatusInflictingItem{
         int amplifier = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getInnerStat().mcdar$getAmplifier();
         int amplifier2 = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getInnerStat().mcdar$getAmplifier2();
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
         CleanlinessHelper.playCenteredSound(user, SoundEvents.BLOCK_BELL_USE, SoundCategory.BLOCKS, 2.0F, 1.0F);
         CleanlinessHelper.playCenteredSound(user, SoundEvents.BLOCK_BELL_RESONATE, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -49,7 +49,7 @@ public class GongOfWeakeningItem extends ArtifactStatusInflictingItem{
         }
 
 
-        user.getItemCooldownManager().set(this, maxCooldownEnchantmentTime);
+        user.getItemCooldownManager().set(this, modifiedCooldownEnchantmentTime);
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 

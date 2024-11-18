@@ -3,7 +3,7 @@ package dev.timefall.mcdar.artifacts;
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.api.SummoningHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.SummoningArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,13 +20,13 @@ import java.util.List;
 public class EnchantedGrassItem extends ArtifactSummoningItem{
     public EnchantedGrassItem() {
         super(
-                SummoningArtifactID.ENCHANTED_GRASS,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getSummoningArtifactStats().ENCHANTED_GRASS_STATS.mcdar$getDurability()
         );
     }
 
     public ActionResult useOnBlock (ItemUsageContext itemUsageContext){
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getSummoningArtifactStats().ENCHANTED_GRASS_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, itemUsageContext.getPlayer(), itemUsageContext.getWorld());
 
         if (itemUsageContext.getWorld() instanceof ServerWorld serverWorld) {
             PlayerEntity itemUsageContextPlayer = itemUsageContext.getPlayer();
@@ -48,7 +48,7 @@ public class EnchantedGrassItem extends ArtifactSummoningItem{
                     }
 
 
-                    itemUsageContextPlayer.getItemCooldownManager().set(this, maxCooldownEnchantmentTime);
+                    itemUsageContextPlayer.getItemCooldownManager().set(this, modifiedCooldownEnchantmentTime);
                     return ActionResult.CONSUME;
                 }
             }

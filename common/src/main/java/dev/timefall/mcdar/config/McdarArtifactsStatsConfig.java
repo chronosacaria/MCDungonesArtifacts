@@ -6,9 +6,13 @@ import dev.timefall.mcdar.config.item_sections.*;
 import me.fzzyhmstrs.fzzy_config.annotations.IgnoreVisibility;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.fzzyhmstrs.fzzy_config.config.Config;
+import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedList;
+import me.fzzyhmstrs.fzzy_config.validation.minecraft.ValidatedIdentifier;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,6 +29,10 @@ public class McdarArtifactsStatsConfig extends Config {
     transient Set<Identifier> illager = GroupedObjectsHelper.ILLAGER_ARTIFACT_GENERAL_LOOT_TABLES.stream().map(RegistryKey::getValue).collect(Collectors.toSet());
     transient Set<Identifier> dungeon = GroupedObjectsHelper.ALL_ARTIFACTS_DUNGEON_LOOT_TABLES.stream().map(RegistryKey::getValue).collect(Collectors.toSet());
 
+    // Determines if the table is valid
+    private ValidatedList<Identifier> villagerLootTables = ValidatedIdentifier.ofDynamicKey(RegistryKeys.LOOT_TABLE, "mcdar_artifact_stats_villager_loot_tables", (id, entry) -> true).toList(villager);
+    private ValidatedList<Identifier> illagerLootTables = ValidatedIdentifier.ofDynamicKey(RegistryKeys.LOOT_TABLE, "mcdar_artifacts_stats_illager_loot_tables", (id, entry) -> true).toList(illager);
+    private ValidatedList<Identifier> dungeonLootTables = ValidatedIdentifier.ofDynamicKey(RegistryKeys.LOOT_TABLE, "mcdar_artifacts_stats_dungeon_loot_tables", (id, entry) -> true).toList(dungeon);
 
     private DamagingArtifactStats damagingArtifactStats = new DamagingArtifactStats(villager, illager, dungeon);
     private AgilityArtifactStats agilityArtifactStats = new AgilityArtifactStats(villager, illager, dungeon);
@@ -53,6 +61,18 @@ public class McdarArtifactsStatsConfig extends Config {
         return statusInflictingArtifactStats;
     }
 
+    public List<Identifier> mcdar$getVillagerLootTables() {
+        return villagerLootTables;
+    }
+
+    public List<Identifier> mcdar$getIllagerLootTables() {
+        return illagerLootTables;
+    }
+
+    public List<Identifier> mcdar$getDungeonLootTables() {
+        return dungeonLootTables;
+    }
+
     public SummoningArtifactStats mcdar$getSummoningArtifactStats() {
         return summoningArtifactStats;
     }
@@ -60,405 +80,4 @@ public class McdarArtifactsStatsConfig extends Config {
     public McdarArtifactsStatsConfig() {
         super(ModConstants.ID("mcdar_artifacts_stats_config"));
     }
-/*
-    public McdarArtifactsStatsConfig() {
-        Set<String> villager = GroupedObjectsHelper.VILLAGER_ARTIFACT_GENERAL_LOOT_TABLES.stream().map(Identifier::toString).collect(Collectors.toSet());
-        Set<String> illager = GroupedObjectsHelper.ILLAGER_ARTIFACT_GENERAL_LOOT_TABLES.stream().map(Identifier::toString).collect(Collectors.toSet());
-        Set<String> dungeon = GroupedObjectsHelper.ALL_ARTIFACTS_DUNGEON_LOOT_TABLES.stream().map(Identifier::toString).collect(Collectors.toSet());
-        AGILITY_ARTIFACT_STATS.put(
-                AgilityArtifactID.BOOTS_OF_SWIFTNESS,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        100,
-                        2,
-                        1,
-                        villager,
-                        dungeon
-                )
-        );
-        AGILITY_ARTIFACT_STATS.put(
-                AgilityArtifactID.DEATH_CAP_MUSHROOM,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        600,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-        AGILITY_ARTIFACT_STATS.put(
-                AgilityArtifactID.GHOST_CLOAK,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        120,
-                        2,
-                        1,
-                        villager,
-                        dungeon
-                )
-        );
-        AGILITY_ARTIFACT_STATS.put(
-                AgilityArtifactID.LIGHT_FEATHER,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        120,
-                        2,
-                        1,
-                        villager,
-                        dungeon
-                )
-        );
-
-        DAMAGING_ARTIFACT_STATS.put(
-                DamagingArtifactID.BLAST_FUNGUS,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        120,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-        DAMAGING_ARTIFACT_STATS.put(
-                DamagingArtifactID.HARVESTER,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        60,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-        DAMAGING_ARTIFACT_STATS.put(
-                DamagingArtifactID.LIGHTNING_ROD,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        40,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-        DAMAGING_ARTIFACT_STATS.put(
-                DamagingArtifactID.POWERSHAKER,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        600,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-        DAMAGING_ARTIFACT_STATS.put(
-                DamagingArtifactID.UPDRAFT_TOME,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        300,
-                        2,
-                        1,
-                        villager,
-                        dungeon
-                )
-        );
-
-        DEFENSIVE_ARTIFACT_STATS.put(
-                DefensiveArtifactID.ENCHANTERS_TOME,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        100,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-        DEFENSIVE_ARTIFACT_STATS.put(
-                DefensiveArtifactID.IRON_HIDE_AMULET,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        500,
-                        2,
-                        1,
-                        villager,
-                        dungeon
-                )
-        );
-        DEFENSIVE_ARTIFACT_STATS.put(
-                DefensiveArtifactID.SOUL_HEALER,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        60,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-        DEFENSIVE_ARTIFACT_STATS.put(
-                DefensiveArtifactID.TOTEM_OF_REGENERATION,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        600,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-        DEFENSIVE_ARTIFACT_STATS.put(
-                DefensiveArtifactID.TOTEM_OF_SHIELDING,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        600,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-        DEFENSIVE_ARTIFACT_STATS.put(
-                DefensiveArtifactID.TOTEM_OF_SOUL_PROTECTION,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        600,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-        DEFENSIVE_ARTIFACT_STATS.put(
-                DefensiveArtifactID.WIND_HORN,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        250,
-                        2,
-                        1,
-                        villager,
-                        dungeon
-                )
-        );
-
-        QUIVER_ARTIFACT_STATS.put(
-                QuiverArtifactID.FLAMING_QUIVER,
-                new ArtifactStatsConfigHelper(
-                        List.of(
-                                "When Quivers are activated, their effect remains",
-                                "active during the cooldown phase. Therefore, their",
-                                "maxCooldownEnchantmentTime should be treated as inverted:",
-                                "the higher the value, the longer the effect lasts;",
-                                "the lower the value, the shorter the effect lasts."
-                        ),
-                        true,
-                        8,
-                        500,
-                        2,
-                        1,
-                        villager,
-                        dungeon
-                )
-        );
-        QUIVER_ARTIFACT_STATS.put(
-                QuiverArtifactID.HARPOON_QUIVER,
-                new ArtifactStatsConfigHelper(
-                        List.of(
-                                "When Quivers are activated, their effect remains",
-                                "active during the cooldown phase. Therefore, their",
-                                "maxCooldownEnchantmentTime should be treated as inverted:",
-                                "the higher the value, the longer the effect lasts;",
-                                "the lower the value, the shorter the effect lasts."
-                        ),
-                        true,
-                        8,
-                        600,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-        QUIVER_ARTIFACT_STATS.put(
-                QuiverArtifactID.THUNDERING_QUIVER,
-                new ArtifactStatsConfigHelper(
-                        List.of(
-                                "When Quivers are activated, their effect remains",
-                                "active during the cooldown phase. Therefore, their",
-                                "maxCooldownEnchantmentTime should be treated as inverted:",
-                                "the higher the value, the longer the effect lasts;",
-                                "the lower the value, the shorter the effect lasts."
-                        ),
-                        true,
-                        8,
-                        600,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-        QUIVER_ARTIFACT_STATS.put(
-                QuiverArtifactID.TORMENT_QUIVER,
-                new ArtifactStatsConfigHelper(
-                        List.of(
-                                "When Quivers are activated, their effect remains",
-                                "active during the cooldown phase. Therefore, their",
-                                "maxCooldownEnchantmentTime should be treated as inverted:",
-                                "the higher the value, the longer the effect lasts;",
-                                "the lower the value, the shorter the effect lasts."
-                        ),
-                        true,
-                        8,
-                        600,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-
-        STATUS_INFLICTING_ARTIFACT_STATS.put(
-                StatusInflictingArtifactID.CORRUPTED_SEEDS,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        100,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-        STATUS_INFLICTING_ARTIFACT_STATS.put(
-                StatusInflictingArtifactID.GONG_OF_WEAKENING,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        100,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-        STATUS_INFLICTING_ARTIFACT_STATS.put(
-                StatusInflictingArtifactID.LOVE_MEDALLION,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        120,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-        STATUS_INFLICTING_ARTIFACT_STATS.put(
-                StatusInflictingArtifactID.SATCHEL_OF_ELEMENTS,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        60,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-        STATUS_INFLICTING_ARTIFACT_STATS.put(
-                StatusInflictingArtifactID.SHOCK_POWDER,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        64,
-                        300,
-                        2,
-                        1,
-                        illager,
-                        dungeon
-                )
-        );
-
-        SUMMONING_ARTIFACT_STATS.put(
-                SummoningArtifactID.BUZZY_NEST,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        8,
-                        600,
-                        2,
-                        1,
-                        villager,
-                        dungeon
-                )
-        );
-        SUMMONING_ARTIFACT_STATS.put(
-                SummoningArtifactID.ENCHANTED_GRASS,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        8,
-                        600,
-                        2,
-                        1,
-                        villager,
-                        dungeon
-                )
-        );
-        SUMMONING_ARTIFACT_STATS.put(
-                SummoningArtifactID.GOLEM_KIT,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        8,
-                        600,
-                        2,
-                        1,
-                        villager,
-                        dungeon
-                )
-        );
-        SUMMONING_ARTIFACT_STATS.put(
-                SummoningArtifactID.TASTY_BONE,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        8,
-                        600,
-                        2,
-                        1,
-                        villager,
-                        dungeon
-                )
-        );
-        SUMMONING_ARTIFACT_STATS.put(
-                SummoningArtifactID.WONDERFUL_WHEAT,
-                new ArtifactStatsConfigHelper(
-                        true,
-                        8,
-                        600,
-                        2,
-                        1,
-                        villager,
-                        dungeon
-                )
-        );
-    }
-
- */
 }

@@ -18,7 +18,7 @@ public class DefensiveArtifactStats extends ConfigSection {
                 100,
                 2,
                 1,
-                villager,
+                illager,
                 dungeon
         );
         this.IRON_HIDE_AMULET_STATS = new ComplexArtifactStats<>(
@@ -26,10 +26,10 @@ public class DefensiveArtifactStats extends ConfigSection {
                 true,
                 true,
                 64,
-                600,
+                500,
                 2,
                 1,
-                illager,
+                villager,
                 dungeon
         );
         this.SATCHEL_OF_ELIXIRS_STATS = new ArtifactStats(
@@ -57,10 +57,10 @@ public class DefensiveArtifactStats extends ConfigSection {
                 true,
                 true,
                 64,
-                120,
+                60,
                 2,
                 1,
-                villager,
+                illager,
                 dungeon
         );
         this.TOTEM_OF_REGENERATION_STATS = new ComplexArtifactStats<>(
@@ -68,10 +68,10 @@ public class DefensiveArtifactStats extends ConfigSection {
                 true,
                 true,
                 64,
-                120,
+                600,
                 2,
                 1,
-                villager,
+                illager,
                 dungeon
         );
         this.TOTEM_OF_SHIELDING_STATS = new ComplexArtifactStats<>(
@@ -79,10 +79,10 @@ public class DefensiveArtifactStats extends ConfigSection {
                 true,
                 true,
                 64,
-                120,
+                600,
                 2,
                 1,
-                villager,
+                illager,
                 dungeon
         );
         this.TOTEM_OF_SOUL_PROTECTION_STATS = new ComplexArtifactStats<>(
@@ -90,10 +90,10 @@ public class DefensiveArtifactStats extends ConfigSection {
                 true,
                 true,
                 64,
-                120,
+                600,
                 2,
                 1,
-                villager,
+                illager,
                 dungeon
         );
         // Damage for the Wind Horn is the Knockback Multiplier
@@ -102,7 +102,7 @@ public class DefensiveArtifactStats extends ConfigSection {
                 true,
                 true,
                 64,
-                120,
+                250,
                 2,
                 1,
                 villager,

@@ -16,7 +16,7 @@ public class QuiverArtifactStats extends ConfigSection {
                 true,
                 true,
                 64,
-                100,
+                600,
                 2,
                 1,
                 villager,
@@ -36,10 +36,10 @@ public class QuiverArtifactStats extends ConfigSection {
                 true,
                 true,
                 64,
-                120,
+                600,
                 2,
                 1,
-                villager,
+                illager,
                 dungeon
         );
         this.TORMENT_QUIVER_STATS = new ComplexArtifactStats<>(
@@ -47,10 +47,10 @@ public class QuiverArtifactStats extends ConfigSection {
                 true,
                 true,
                 64,
-                120,
+                600,
                 2,
                 1,
-                villager,
+                illager,
                 dungeon
         );
     }

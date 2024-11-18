@@ -3,9 +3,8 @@ package dev.timefall.mcdar.artifacts;
 import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
-import dev.timefall.mcdar.api.McdarEnchantmentHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.DefensiveArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -37,7 +36,6 @@ public class WindHornItem extends ArtifactDefensiveItem{
 
     public WindHornItem(TagKey<Instrument> instrumentTag) {
         super(
-                DefensiveArtifactID.WIND_HORN,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().WIND_HORN_STATS.mcdar$getDurability()
         );
         this.instrumentTag = instrumentTag;
@@ -46,6 +44,7 @@ public class WindHornItem extends ArtifactDefensiveItem{
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().WIND_HORN_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
         Optional<? extends RegistryEntry<Instrument>> optional = this.getInstrument(itemStack);
         if (optional.isPresent()) {
@@ -62,10 +61,10 @@ public class WindHornItem extends ArtifactDefensiveItem{
                 itemStack.damage(1, user, equipmentSlot);
             }
 
-            McdarEnchantmentHelper.mcdar$cooldownHelper(
+            EnchantmentEffects.mcdar$cooldownHelper(
                     user,
                     this,
-                    maxCooldownEnchantmentTime
+                    modifiedCooldownEnchantmentTime
             );
             return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
 

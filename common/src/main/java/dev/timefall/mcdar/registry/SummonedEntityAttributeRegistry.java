@@ -1,4 +1,4 @@
-package dev.timefall.mcdar.registries;
+package dev.timefall.mcdar.registry;
 
 import dev.timefall.mcdar.entities.*;
 import dev.timefall.mcdar.mixin.DefaultAttributeRegistryAccessor;

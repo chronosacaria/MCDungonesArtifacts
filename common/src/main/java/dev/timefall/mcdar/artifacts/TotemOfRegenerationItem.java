@@ -2,9 +2,8 @@ package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.AOECloudHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
-import dev.timefall.mcdar.api.McdarEnchantmentHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.DefensiveArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -23,7 +22,6 @@ import java.util.List;
 public class TotemOfRegenerationItem extends ArtifactDefensiveItem{
     public TotemOfRegenerationItem() {
         super(
-                DefensiveArtifactID.TOTEM_OF_REGENERATION,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().TOTEM_OF_REGENERATION_STATS.mcdar$getDurability()
         );
     }
@@ -34,6 +32,7 @@ public class TotemOfRegenerationItem extends ArtifactDefensiveItem{
         int effectDuration = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().TOTEM_OF_REGENERATION_STATS.mcdar$getInnerStat().mcdar$getEffectDuration();
         int amplifier = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().TOTEM_OF_REGENERATION_STATS.mcdar$getInnerStat().mcdar$getAmplifier();
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().TOTEM_OF_REGENERATION_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, itemUsageContext.getPlayer(), itemUsageContext.getWorld());
 
         if (itemUsageContext.getWorld() instanceof ServerWorld serverWorld) {
             PlayerEntity itemUsageContextPlayer = itemUsageContext.getPlayer();
@@ -63,10 +62,10 @@ public class TotemOfRegenerationItem extends ArtifactDefensiveItem{
                     itemUsageContext.getStack().damage(1, itemUsageContextPlayer, equipmentSlot);
                 }
 
-                McdarEnchantmentHelper.mcdar$cooldownHelper(
+                EnchantmentEffects.mcdar$cooldownHelper(
                         itemUsageContextPlayer,
                         this,
-                        maxCooldownEnchantmentTime
+                        modifiedCooldownEnchantmentTime
                 );
                 return ActionResult.CONSUME;
             }

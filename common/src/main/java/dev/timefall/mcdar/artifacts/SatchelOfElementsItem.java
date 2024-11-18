@@ -2,9 +2,8 @@ package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
-import dev.timefall.mcdar.api.McdarEnchantmentHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.StatusInflictingArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -19,7 +18,6 @@ import java.util.List;
 public class SatchelOfElementsItem extends ArtifactStatusInflictingItem{
     public SatchelOfElementsItem() {
         super(
-                StatusInflictingArtifactID.SATCHEL_OF_ELEMENTS,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SATCHEL_OF_ELEMENTS_STATS.mcdar$getDurability()
         );
     }
@@ -39,7 +37,7 @@ public class SatchelOfElementsItem extends ArtifactStatusInflictingItem{
                 int amplifier2 = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SHOCK_POWDER_STATS.mcdar$getInnerStat().mcdar$getAmplifier2();
                 int amplifier3 = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SHOCK_POWDER_STATS.mcdar$getInnerStat().mcdar$getAmplifier3();
                 int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SATCHEL_OF_ELEMENTS_STATS.mcdar$getMaxCooldownEnchantmentTime();
-
+                int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, user.getWorld());
 
                 if (user.totalExperience >= experienceDrain || user.isCreative()) {
                     AOEHelper.satchelOfElementsEffects(user, damage, range, duration, amplifier, amplifier2, amplifier3);
@@ -49,10 +47,10 @@ public class SatchelOfElementsItem extends ArtifactStatusInflictingItem{
                         EquipmentSlot equipmentSlot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
                         itemStack.damage(1, user, equipmentSlot);
                     }
-                    McdarEnchantmentHelper.mcdar$cooldownHelper(
+                    EnchantmentEffects.mcdar$cooldownHelper(
                             user,
                             this,
-                            maxCooldownEnchantmentTime
+                            modifiedCooldownEnchantmentTime
                     );
                     return ActionResult.CONSUME;
                 }

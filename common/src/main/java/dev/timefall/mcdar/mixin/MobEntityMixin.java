@@ -1,6 +1,6 @@
 package dev.timefall.mcdar.mixin;
 
-import dev.timefall.mcdar.registries.StatusEffectRegistry;
+import dev.timefall.mcdar.registry.StatusEffectRegistry;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.registry.entry.RegistryEntry;
 import org.spongepowered.asm.mixin.Mixin;

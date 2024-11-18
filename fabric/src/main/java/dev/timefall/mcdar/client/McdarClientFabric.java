@@ -27,7 +27,7 @@ public class McdarClientFabric implements ClientModInitializer {
     public void onInitializeClient() {
 
         //SummonedEntityRenderRegistry.register();
-        SummonedEntityRenderRegistryFabric.init();
+        SummonedEntityRenderRegistryFabric.register();
 
         // Optional Resource Pack
         FabricLoader.getInstance().getModContainer(ModConstants.MOD_ID).ifPresent(

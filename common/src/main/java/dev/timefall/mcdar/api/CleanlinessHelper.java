@@ -1,7 +1,6 @@
 package dev.timefall.mcdar.api;
 
-import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.*;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -109,7 +108,7 @@ public class CleanlinessHelper {
             EquipmentSlot equipmentSlot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
             itemStack.damage(1, player, equipmentSlot);
         }
-        McdarEnchantmentHelper.mcdar$cooldownHelper(player, artifact, maxCooldown);
+        EnchantmentEffects.mcdar$cooldownHelper(player, artifact, maxCooldown);
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }
 
@@ -133,7 +132,7 @@ public class CleanlinessHelper {
                         itemUsageContext.getStack().damage(1, itemUsageContextPlayer, equipmentSlot);
                     }
 
-                    McdarEnchantmentHelper.mcdar$cooldownHelper(
+                    EnchantmentEffects.mcdar$cooldownHelper(
                             itemUsageContextPlayer,
                             artifact,
                             cooldown);
@@ -144,9 +143,15 @@ public class CleanlinessHelper {
         return ActionResult.SUCCESS;
     }
 
+    public static ItemStack mcdar$getEitherHandItemStack(PlayerEntity playerEntity) {
+        return !playerEntity.getOffHandStack().isEmpty()
+                ? playerEntity.getOffHandStack()
+                : playerEntity.getMainHandStack();
+    }
+/*
     public static int mcdar$artifactIDToItemCooldownTime(Item artifactItem) {
-        int cooldownLevel = 1/*EnchantmentHelper.getLevel(RegistryEntry.of(EnchantsRegistry.COOLDOWN), artifactItem.getDefaultStack())*/;
-        //if (artifactItem instanceof IArtifactItem) {
+        int cooldownLevel = EnchantmentHelper.getLevel(RegistryEntry.of(EnchantsRegistry.COOLDOWN), artifactItem.getDefaultStack());
+        if (artifactItem instanceof IArtifactItem) {
             for (AgilityArtifactID agilityArtifactID : AgilityArtifactID.values())
                 if (artifactItem.asItem() == agilityArtifactID.mcdar$getItem()
                         && McdarArtifactsStatsConfig.CONFIG.AGILITY_ARTIFACT_STATS.get(agilityArtifactID)
@@ -186,4 +191,6 @@ public class CleanlinessHelper {
         //}
         return 0;
     }
+
+ */
 }

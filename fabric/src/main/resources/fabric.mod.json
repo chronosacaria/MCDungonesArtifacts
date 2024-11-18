@@ -18,6 +18,9 @@
   "entrypoints": {
     "main": [
       "dev.timefall.mcdar.McdarFabric"
+    ],
+    "fabric-datagen": [
+      "dev.timefall.mcdar.data.McdarDataGenerator"
     ]
   },
   "mixins": [

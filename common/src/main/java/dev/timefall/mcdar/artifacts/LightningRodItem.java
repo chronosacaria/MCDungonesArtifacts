@@ -2,9 +2,8 @@ package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
-import dev.timefall.mcdar.api.McdarEnchantmentHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.DamagingArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -20,14 +19,14 @@ import java.util.List;
 public class LightningRodItem extends ArtifactDamagingItem{
     public LightningRodItem() {
         super(
-                DamagingArtifactID.LIGHTNING_ROD,
-                McdarArtifactsStatsConfig.CONFIG.DAMAGING_ARTIFACT_STATS
-                        .get(DamagingArtifactID.LIGHTNING_ROD).mcdar$getDurability()
+                McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().LIGHTNING_ROD_STATS.mcdar$getDurability()
         );
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
+        int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().LIGHTNING_ROD_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
         if (user.totalExperience >= 15 || user.isCreative()) {
             AOEHelper.electrocuteNearbyEnemies(user, 5, 5, Integer.MAX_VALUE);
@@ -38,9 +37,10 @@ public class LightningRodItem extends ArtifactDamagingItem{
                 itemStack.damage(1, user, equipmentSlot);
             }
 
-            McdarEnchantmentHelper.mcdar$cooldownHelper(
+            EnchantmentEffects.mcdar$cooldownHelper(
                     user,
-                    this
+                    this,
+                    modifiedCooldownEnchantmentTime
             );
         }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);

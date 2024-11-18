@@ -3,10 +3,9 @@ package dev.timefall.mcdar.artifacts;
 import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
-import dev.timefall.mcdar.api.McdarEnchantmentHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.AgilityArtifactID;
-import dev.timefall.mcdar.registries.StatusEffectRegistry;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
+import dev.timefall.mcdar.registry.StatusEffectRegistry;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -26,13 +25,14 @@ import java.util.List;
 public class LightFeatherItem extends ArtifactAgilityItem{
     public LightFeatherItem() {
         super(
-                AgilityArtifactID.LIGHT_FEATHER,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().LIGHT_FEATHER_STATS.mcdar$getDurability()
         );
     }
 
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
+        int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().LIGHT_FEATHER_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
         user.jump();
 
@@ -65,9 +65,10 @@ public class LightFeatherItem extends ArtifactAgilityItem{
             itemStack.damage(1, user, equipmentSlot);
         }
 
-        McdarEnchantmentHelper.mcdar$cooldownHelper(
+        EnchantmentEffects.mcdar$cooldownHelper(
                 user,
-                this
+                this,
+                modifiedCooldownEnchantmentTime
         );
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);

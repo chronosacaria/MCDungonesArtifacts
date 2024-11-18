@@ -4,7 +4,7 @@ import dev.timefall.mcdar.api.AOECloudHelper;
 import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.DamagingArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -21,7 +21,6 @@ import java.util.List;
 public class HarvesterItem extends ArtifactDamagingItem{
     public HarvesterItem() {
         super(
-                DamagingArtifactID.HARVESTER,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().HARVESTER_STATS.mcdar$getDurability()
         );
     }
@@ -30,6 +29,7 @@ public class HarvesterItem extends ArtifactDamagingItem{
         ItemStack itemStack = user.getStackInHand(hand);
         int experienceDrain = McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().HARVESTER_STATS.mcdar$getInnerStat().mcdar$getExperienceDrain();
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().HARVESTER_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
         int damage = McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().HARVESTER_STATS.mcdar$getInnerStat().mcdar$getDamageOrHealing();
         float range = McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().HARVESTER_STATS.mcdar$getInnerStat().mcdar$getRange();
 
@@ -44,7 +44,7 @@ public class HarvesterItem extends ArtifactDamagingItem{
                 itemStack.damage(1, user, equipmentSlot);
             }
 
-            user.getItemCooldownManager().set(this, maxCooldownEnchantmentTime);
+            user.getItemCooldownManager().set(this, modifiedCooldownEnchantmentTime);
         }
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

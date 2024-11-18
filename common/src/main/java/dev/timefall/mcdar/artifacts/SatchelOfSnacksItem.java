@@ -2,9 +2,8 @@ package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
-import dev.timefall.mcdar.api.McdarEnchantmentHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.DefensiveArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -21,7 +20,6 @@ import java.util.List;
 public class SatchelOfSnacksItem extends ArtifactDefensiveItem{
     public SatchelOfSnacksItem() {
         super(
-                DefensiveArtifactID.SATCHEL_OF_SNACKS,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SATCHEL_OF_SNACKS_STATS.mcdar$getDurability()
         );
     }
@@ -29,6 +27,7 @@ public class SatchelOfSnacksItem extends ArtifactDefensiveItem{
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SATCHEL_OF_SNACKS_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
         Item snackToDrop =
                 AbilityHelper.SATCHEL_OF_SNACKS_LIST.get(user.getRandom().nextInt(AbilityHelper.SATCHEL_OF_SNACKS_LIST.size()));
@@ -40,10 +39,10 @@ public class SatchelOfSnacksItem extends ArtifactDefensiveItem{
             itemStack.damage(1, user, equipmentSlot);
         }
 
-        McdarEnchantmentHelper.mcdar$cooldownHelper(
+        EnchantmentEffects.mcdar$cooldownHelper(
                 user,
                 this,
-                maxCooldownEnchantmentTime
+                modifiedCooldownEnchantmentTime
         );
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

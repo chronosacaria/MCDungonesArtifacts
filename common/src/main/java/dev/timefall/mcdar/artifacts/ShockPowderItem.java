@@ -2,10 +2,9 @@ package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
-import dev.timefall.mcdar.api.McdarEnchantmentHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.StatusInflictingArtifactID;
-import dev.timefall.mcdar.registries.StatusEffectRegistry;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
+import dev.timefall.mcdar.registry.StatusEffectRegistry;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -25,7 +24,6 @@ import java.util.List;
 public class ShockPowderItem extends ArtifactStatusInflictingItem{
     public ShockPowderItem() {
         super(
-                StatusInflictingArtifactID.SHOCK_POWDER,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SHOCK_POWDER_STATS.mcdar$getDurability()
         );
     }
@@ -38,7 +36,7 @@ public class ShockPowderItem extends ArtifactStatusInflictingItem{
         int amplifier2 = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SHOCK_POWDER_STATS.mcdar$getInnerStat().mcdar$getAmplifier2();
         int amplifier3 = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SHOCK_POWDER_STATS.mcdar$getInnerStat().mcdar$getAmplifier3();
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SHOCK_POWDER_STATS.mcdar$getMaxCooldownEnchantmentTime();
-
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
         AOEHelper.afflictNearbyEntities(
                 user,
@@ -53,10 +51,10 @@ public class ShockPowderItem extends ArtifactStatusInflictingItem{
             itemStack.damage(1, user, equipmentSlot);
         }
 
-        McdarEnchantmentHelper.mcdar$cooldownHelper(
+        EnchantmentEffects.mcdar$cooldownHelper(
                 user,
                 this,
-                maxCooldownEnchantmentTime
+                modifiedCooldownEnchantmentTime
         );
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

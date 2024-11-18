@@ -1,10 +1,9 @@
 package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.CleanlinessHelper;
-import dev.timefall.mcdar.api.McdarEnchantmentHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
 import dev.timefall.mcdar.effects.ArtifactEffects;
-import dev.timefall.mcdar.enums.DamagingArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -21,14 +20,14 @@ import java.util.List;
 public class UpdraftTomeItem extends ArtifactDamagingItem{
     public UpdraftTomeItem() {
         super(
-                DamagingArtifactID.UPDRAFT_TOME,
-                McdarArtifactsStatsConfig.CONFIG.DAMAGING_ARTIFACT_STATS
-                        .get(DamagingArtifactID.UPDRAFT_TOME).mcdar$getDurability()
+                McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().UPDRAFT_TOME_STATS.mcdar$getDurability()
         );
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
+        int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().UPDRAFT_TOME_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
         ArtifactEffects.updraftNearbyEnemies(user);
         if (!user.isCreative()){
@@ -36,9 +35,10 @@ public class UpdraftTomeItem extends ArtifactDamagingItem{
             itemStack.damage(1, user, equipmentSlot);
         }
 
-        McdarEnchantmentHelper.mcdar$cooldownHelper(
+        EnchantmentEffects.mcdar$cooldownHelper(
                 user,
-                this
+                this,
+                modifiedCooldownEnchantmentTime
         );
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);

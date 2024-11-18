@@ -1,4 +1,4 @@
-package dev.timefall.mcdar.registries;
+package dev.timefall.mcdar.registry;
 
 import dev.timefall.mcdar.ModConstants;
 import net.minecraft.item.ItemGroup;

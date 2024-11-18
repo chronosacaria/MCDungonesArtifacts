@@ -3,7 +3,7 @@ package dev.timefall.mcdar.artifacts;
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
 import dev.timefall.mcdar.effects.ArtifactEffects;
-import dev.timefall.mcdar.enums.DamagingArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -22,7 +22,6 @@ public class BlastFungusItem extends ArtifactDamagingItem{
 
     public BlastFungusItem() {
             super(
-                    DamagingArtifactID.BLAST_FUNGUS,
                     McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().BLAST_FUNGUS_STATS.mcdar$getDurability()
             );
     }
@@ -33,6 +32,8 @@ public class BlastFungusItem extends ArtifactDamagingItem{
         float range = McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().BLAST_FUNGUS_STATS.mcdar$getInnerStat().mcdar$getRange();
         float damage = McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().BLAST_FUNGUS_STATS.mcdar$getInnerStat().mcdar$getDamage();
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().BLAST_FUNGUS_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
+
 
         CleanlinessHelper.playCenteredSound(user, SoundEvents.ENTITY_GENERIC_EXPLODE.value(), 1.0F, 1.0F);
         ArtifactEffects.causeBlastFungusExplosions(user, range, damage);
@@ -40,7 +41,7 @@ public class BlastFungusItem extends ArtifactDamagingItem{
             EquipmentSlot equipmentSlot = hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
             itemStack.damage(1, user, equipmentSlot);
         }
-        user.getItemCooldownManager().set(this, maxCooldownEnchantmentTime);
+        user.getItemCooldownManager().set(this, modifiedCooldownEnchantmentTime);
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
     }

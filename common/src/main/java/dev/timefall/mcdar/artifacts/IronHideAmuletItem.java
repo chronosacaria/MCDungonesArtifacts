@@ -2,7 +2,7 @@ package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.DefensiveArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -17,7 +17,6 @@ import java.util.List;
 public class IronHideAmuletItem extends ArtifactDefensiveItem{
     public IronHideAmuletItem() {
         super(
-                DefensiveArtifactID.IRON_HIDE_AMULET,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().IRON_HIDE_AMULET_STATS.mcdar$getDurability()
         );
     }
@@ -26,12 +25,13 @@ public class IronHideAmuletItem extends ArtifactDefensiveItem{
         int duration = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().IRON_HIDE_AMULET_STATS.mcdar$getInnerStat().mcdar$getDuration();
         int amplifier = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().IRON_HIDE_AMULET_STATS.mcdar$getInnerStat().mcdar$getAmplifier();
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().IRON_HIDE_AMULET_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
         return CleanlinessHelper.mcdar$cleanUseWithOptionalStatus(
                 user,
                 hand,
                 this,
-                maxCooldownEnchantmentTime,
+                modifiedCooldownEnchantmentTime,
                 StatusEffects.RESISTANCE,
                 duration,
                 amplifier,

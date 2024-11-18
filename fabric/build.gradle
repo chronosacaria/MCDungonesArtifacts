@@ -23,6 +23,9 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+    modImplementation "maven.modrinth:fzzy-config:${rootProject.fzzyConfigVersion}"
+    modImplementation("net.fabricmc:fabric-language-kotlin:1.12.1+kotlin.2.0.20")
+
 }
 
 publishMods {
@@ -82,4 +85,8 @@ publishing {
     repositories {
         // Add repositories to publish to here.
     }
+}
+
+fabricApi {
+    configureDataGeneration()
 }

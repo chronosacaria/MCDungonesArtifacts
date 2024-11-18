@@ -1,6 +1,6 @@
 package dev.timefall.mcdar.config;
 /*
-import dev.timefall.mcdar.enchants.EnchantmentsID;
+import dev.timefall.mcdar.enchantments.EnchantmentsID;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 

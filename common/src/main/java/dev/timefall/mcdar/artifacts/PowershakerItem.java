@@ -2,7 +2,7 @@ package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.DamagingArtifactID;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
@@ -16,17 +16,19 @@ import java.util.List;
 public class PowershakerItem extends ArtifactDamagingItem {
     public PowershakerItem() {
         super(
-                DamagingArtifactID.POWERSHAKER,
-                McdarArtifactsStatsConfig.CONFIG.DAMAGING_ARTIFACT_STATS
-                        .get(DamagingArtifactID.POWERSHAKER).mcdar$getDurability()
+                McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().POWERSHAKER_STATS.mcdar$getDurability()
         );
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand) {
+        int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().POWERSHAKER_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
+
         return CleanlinessHelper.mcdar$cleanUseWithOptionalStatus(
                 user,
                 hand,
                 this,
+                modifiedCooldownEnchantmentTime,
                 null,
                 null,
                 null,

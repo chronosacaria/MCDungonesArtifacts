@@ -1,11 +1,9 @@
 package dev.timefall.mcdar.api;
 
-import dev.timefall.mcdar.enums.*;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.LootTables;
 import net.minecraft.registry.RegistryKey;
 
-import java.util.List;
 import java.util.Set;
 
 public class GroupedObjectsHelper {
@@ -24,6 +22,7 @@ public class GroupedObjectsHelper {
     public static final Set<RegistryKey<LootTable>> ALL_ARTIFACTS_DUNGEON_LOOT_TABLES =
             Set.of(LootTables.ABANDONED_MINESHAFT_CHEST, LootTables.SIMPLE_DUNGEON_CHEST, LootTables.SHIPWRECK_TREASURE_CHEST);
 
+    /*
     public static final List<IArtifactItem> illagerArtifacts = List.of(
             AgilityArtifactID.DEATH_CAP_MUSHROOM,
             DamagingArtifactID.BLAST_FUNGUS,
@@ -90,4 +89,5 @@ public class GroupedObjectsHelper {
             SummoningArtifactID.GOLEM_KIT,
             SummoningArtifactID.TASTY_BONE,
             SummoningArtifactID.WONDERFUL_WHEAT);
+     */
 }

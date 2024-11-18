@@ -4,10 +4,7 @@ import me.fzzyhmstrs.fzzy_config.annotations.Action;
 import me.fzzyhmstrs.fzzy_config.annotations.IgnoreVisibility;
 import me.fzzyhmstrs.fzzy_config.annotations.RequiresAction;
 import me.fzzyhmstrs.fzzy_config.util.Walkable;
-import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedSet;
-import me.fzzyhmstrs.fzzy_config.validation.minecraft.ValidatedIdentifier;
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedInt;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
 import java.util.Set;
@@ -29,13 +26,13 @@ public class ArtifactStats implements Walkable {
     @RequiresAction(action = Action.RELOAD_DATA)
     @ValidatedInt.Restrict(min = 0)
         int generalSpawnWeight;
-    @RequiresAction(action = Action.RELOAD_DATA)
-        ValidatedSet<Identifier> generalLootTables = ValidatedIdentifier.ofRegistryKey(RegistryKeys.LOOT_TABLE).toSet();
+    //@RequiresAction(action = Action.RELOAD_DATA)
+    //    ValidatedSet<Identifier> generalLootTables = ValidatedIdentifier.ofRegistryKey(RegistryKeys.LOOT_TABLE).toSet();
     @RequiresAction(action = Action.RELOAD_DATA)
     @ValidatedInt.Restrict(min = 0)
         int dungeonSpawnWeight;
-    @RequiresAction(action = Action.RELOAD_DATA)
-        ValidatedSet<Identifier> dungeonLootTables = ValidatedIdentifier.ofRegistryKey(RegistryKeys.LOOT_TABLE).toSet();
+    //@RequiresAction(action = Action.RELOAD_DATA)
+    //    ValidatedSet<Identifier> dungeonLootTables = ValidatedIdentifier.ofDynamicKey(RegistryKeys.LOOT_TABLE, "mcdar_artifacts_stats", (id, entry) -> true).toSet();
 
     public boolean mcdar$getIsEnabled() {
         return isEnabled;
@@ -60,13 +57,13 @@ public class ArtifactStats implements Walkable {
     public int mcdar$getDungeonArtifactSpawnWeight() {
         return dungeonSpawnWeight;
     }
-    public Set<Identifier> mcdar$getGeneralLootTables() {
-        return generalLootTables;
-    }
+    //public Set<Identifier> mcdar$getGeneralLootTables() {
+    //    return generalLootTables;
+    //}
 
-    public Set<Identifier> mcdar$getDungeonLootTables() {
-        return dungeonLootTables;
-    }
+    //public Set<Identifier> mcdar$getDungeonLootTables() {
+    //    return dungeonLootTables;
+    //}
 
     @SuppressWarnings("unused")
     public ArtifactStats() {
@@ -79,7 +76,7 @@ public class ArtifactStats implements Walkable {
         this.isSpawnableInLoot = isSpawnableInLoot;
         this.generalSpawnWeight = generalSpawnWeight;
         this.dungeonSpawnWeight = dungeonSpawnWeight;
-        this.generalLootTables.validateAndSet(generalLootTables);
-        this.dungeonLootTables.validateAndSet(dungeonLootTables);
+        //this.generalLootTables.validateAndSet(generalLootTables);
+        //this.dungeonLootTables.validateAndSet(dungeonLootTables);
     }
 }

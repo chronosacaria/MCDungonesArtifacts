@@ -2,8 +2,7 @@ package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.QuiverArtifactID;
-import net.minecraft.enchantment.EnchantmentHelper;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -19,7 +18,6 @@ import java.util.List;
 public class TormentQuiverItem extends ArtifactQuiverItem{
     public TormentQuiverItem() {
         super(
-                QuiverArtifactID.TORMENT_QUIVER,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getQuiverArtifactStats().TORMENT_QUIVER_STATS.mcdar$getDurability()
         );
     }
@@ -27,13 +25,21 @@ public class TormentQuiverItem extends ArtifactQuiverItem{
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getQuiverArtifactStats().TORMENT_QUIVER_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffectForQuivers(maxCooldownEnchantmentTime, user, world);
+
         if (user.totalExperience >= 20 || user.isCreative()){
 
-            int cooldownLevel = EnchantmentHelper.getEquipmentLevel(EnchantsRegistry.COOLDOWN, user);
-            user.getItemCooldownManager().set(
+            EnchantmentEffects.mcdar$cooldownHelper(
+                    user,
                     this,
-                    (cooldownLevel + 1) * maxCooldownEnchantmentTime
+                    modifiedCooldownEnchantmentTime
             );
+
+            //int cooldownLevel = EnchantmentEffects.getLevel(EnchantmentRegistry.COOLDOWN, user, user.getWorld());
+            //user.getItemCooldownManager().set(
+            //        this,
+            //        (cooldownLevel + 1) * modifiedCooldownEnchantmentTime
+            //);
 
             if (!user.isCreative()) {
                 user.addExperience(-20);

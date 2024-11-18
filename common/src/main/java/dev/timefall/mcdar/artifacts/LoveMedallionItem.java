@@ -3,10 +3,9 @@ package dev.timefall.mcdar.artifacts;
 import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
-import dev.timefall.mcdar.api.McdarEnchantmentHelper;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.enums.StatusInflictingArtifactID;
-import dev.timefall.mcdar.registries.StatusEffectRegistry;
+import dev.timefall.mcdar.effects.EnchantmentEffects;
+import dev.timefall.mcdar.registry.StatusEffectRegistry;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -30,7 +29,6 @@ import java.util.List;
 public class LoveMedallionItem extends ArtifactStatusInflictingItem {
     public LoveMedallionItem() {
         super(
-                StatusInflictingArtifactID.LOVE_MEDALLION,
                 McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().LOVE_MEDALLION_STATS.mcdar$getDurability()
         );
     }
@@ -40,6 +38,8 @@ public class LoveMedallionItem extends ArtifactStatusInflictingItem {
         float range = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().LOVE_MEDALLION_STATS.mcdar$getInnerStat().mcdar$getRange();
         int duration = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().LOVE_MEDALLION_STATS.mcdar$getInnerStat().mcdar$getDuration();
         int amplifier = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().LOVE_MEDALLION_STATS.mcdar$getInnerStat().mcdar$getAmplifier();
+        int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().LOVE_MEDALLION_STATS.mcdar$getMaxCooldownEnchantmentTime();
+        int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
         int i = 0;
 
@@ -56,9 +56,10 @@ public class LoveMedallionItem extends ArtifactStatusInflictingItem {
             itemStack.damage(1, user, equipmentSlot);
         }
 
-        McdarEnchantmentHelper.mcdar$cooldownHelper(
+        EnchantmentEffects.mcdar$cooldownHelper(
                 user,
-                this
+                this,
+                modifiedCooldownEnchantmentTime
         );
 
         return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);

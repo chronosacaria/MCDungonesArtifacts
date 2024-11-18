@@ -1,7 +1,7 @@
 package dev.timefall.mcdar.api;
 
 import dev.timefall.mcdar.mixin.CreeperEntityAccessor;
-import dev.timefall.mcdar.registries.StatusEffectRegistry;
+import dev.timefall.mcdar.registry.StatusEffectRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;

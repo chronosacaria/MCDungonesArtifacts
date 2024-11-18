@@ -1,4 +1,4 @@
-package dev.timefall.mcdar.registries;
+package dev.timefall.mcdar.registry;
 
 import dev.timefall.mcdar.ModConstants;
 import dev.timefall.mcdar.artifacts.*;
@@ -9,6 +9,7 @@ import net.minecraft.registry.tag.InstrumentTags;
 
 
 public class ArtifactsRegistry {
+
     // Illager Artifacts
     public static final Item DEATH_CAP_MUSHROOM = new DeathCapMushroomItem();
     public static final Item BLAST_FUNGUS = new BlastFungusItem();
@@ -42,6 +43,8 @@ public class ArtifactsRegistry {
     public static final Item GOLEM_KIT = new GolemKitItem();
     public static final Item TASTY_BONE = new TastyBoneItem();
     public static final Item WONDERFUL_WHEAT = new WonderfulWheatItem();
+    public static final Item SATCHEL_OF_SNACKS = new SatchelOfSnacksItem();
+    public static final Item SATCHEL_OF_ELIXERS = new SatchelOfElixirsItem();
 
     public static void register() {
         registerArtifacts("death_cap_mushroom", DEATH_CAP_MUSHROOM);
