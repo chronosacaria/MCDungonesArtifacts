@@ -1,7 +1,7 @@
 package dev.timefall.mcdar.client;
 
-import dev.timefall.mcdar.entities.SummonedEntityType;
-import dev.timefall.mcdar.entities.renderers.BuzzyNestBeeRenderer;
+import dev.timefall.mcdar.entity.SummonedEntityType;
+import dev.timefall.mcdar.entity.renderers.BuzzyNestBeeRenderer;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.EntityRenderers;

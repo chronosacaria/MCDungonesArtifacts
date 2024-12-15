@@ -157,7 +157,7 @@ public class AOEHelper {
             afflictNearbyEntities(
                     user,
                     range,
-                    new StatusEffectInstance(RegistryEntry.of(StatusEffectRegistry.STUNNED), duration, amplifier),
+                    new StatusEffectInstance(StatusEffectRegistry.STUNNED.getEntry(), duration, amplifier),
                     new StatusEffectInstance(StatusEffects.NAUSEA, duration, amplifier2),
                     new StatusEffectInstance(StatusEffects.SLOWNESS, duration, amplifier3)
             );

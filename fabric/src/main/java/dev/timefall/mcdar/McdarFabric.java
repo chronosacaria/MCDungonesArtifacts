@@ -1,16 +1,17 @@
 package dev.timefall.mcdar;
 
-import dev.timefall.mcdar.registry.ItemGroupRegistryFabric;
-import dev.timefall.mcdar.registry.LootRegistry;
-import dev.timefall.mcdar.registry.SummonedEntityRegistryFabric;
+import dev.timefall.mcdar.event.McdarFabricEvents;
+import dev.timefall.mcdar.registry.DefaultAttributeRegistryFabric;
+import dev.timefall.mcdar.registry.LootRegistryFabric;
 import net.fabricmc.api.ModInitializer;
 
 public class McdarFabric implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        ItemGroupRegistryFabric.register();
-        SummonedEntityRegistryFabric.register();
-        LootRegistry.register();
+        McdarCommon.initialize();
+        DefaultAttributeRegistryFabric.registerAttributes();
+        McdarFabricEvents.registerEvents();
+        LootRegistryFabric.register();
     }
 }

@@ -1,9 +1,10 @@
 package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.CleanlinessHelper;
+import dev.timefall.mcdar.artifacts.artifact_types.ArtifactSummoningItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.effects.EnchantmentEffects;
-import dev.timefall.mcdar.entities.SummonedEntityType;
+import dev.timefall.mcdar.effect.EnchantmentEffects;
+import dev.timefall.mcdar.entity.SummonedEntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.tooltip.TooltipType;
@@ -12,11 +13,9 @@ import net.minecraft.util.ActionResult;
 
 import java.util.List;
 
-public class GolemKitItem extends ArtifactSummoningItem{
+public class GolemKitItem extends ArtifactSummoningItem {
     public GolemKitItem() {
-        super(
-                McdarArtifactsStatsConfig.CONFIG.mcdar$getSummoningArtifactStats().GOLEM_KIT_STATS.mcdar$getDurability()
-        );
+        super(McdarArtifactsStatsConfig.CONFIG.mcdar$getSummoningArtifactStats().GOLEM_KIT_STATS);
     }
 
     public ActionResult useOnBlock (ItemUsageContext itemUsageContext){

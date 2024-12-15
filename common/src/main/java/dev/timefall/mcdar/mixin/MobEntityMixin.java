@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class MobEntityMixin {
     @Inject(method = "isAiDisabled", at = @At("HEAD"), cancellable = true)
     public void onStunnedMob(CallbackInfoReturnable<Boolean> cir){
-        if (((MobEntity) (Object) this).hasStatusEffect(RegistryEntry.of(StatusEffectRegistry.STUNNED))){
+        if (((MobEntity) (Object) this).hasStatusEffect(StatusEffectRegistry.STUNNED.getEntry())){
             cir.setReturnValue(true);
         }
     }

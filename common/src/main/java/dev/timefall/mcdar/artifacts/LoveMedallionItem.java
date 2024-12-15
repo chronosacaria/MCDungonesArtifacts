@@ -3,8 +3,9 @@ package dev.timefall.mcdar.artifacts;
 import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
+import dev.timefall.mcdar.artifacts.artifact_types.ArtifactStatusInflictingItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.effects.EnchantmentEffects;
+import dev.timefall.mcdar.effect.EnchantmentEffects;
 import dev.timefall.mcdar.registry.StatusEffectRegistry;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -17,7 +18,6 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -28,16 +28,14 @@ import java.util.List;
 
 public class LoveMedallionItem extends ArtifactStatusInflictingItem {
     public LoveMedallionItem() {
-        super(
-                McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().LOVE_MEDALLION_STATS.mcdar$getDurability()
-        );
+        super(McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().LOVE_MEDALLION_STATS);
     }
 
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
-        float range = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().LOVE_MEDALLION_STATS.mcdar$getInnerStat().mcdar$getRange();
-        int duration = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().LOVE_MEDALLION_STATS.mcdar$getInnerStat().mcdar$getDuration();
-        int amplifier = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().LOVE_MEDALLION_STATS.mcdar$getInnerStat().mcdar$getAmplifier();
+        float range = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().LOVE_MEDALLION_STATS.mcdar$getRange();
+        int duration = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().LOVE_MEDALLION_STATS.mcdar$getDuration();
+        int amplifier = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().LOVE_MEDALLION_STATS.mcdar$getAmplifier();
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().LOVE_MEDALLION_STATS.mcdar$getMaxCooldownEnchantmentTime();
         int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
@@ -73,7 +71,7 @@ public class LoveMedallionItem extends ArtifactStatusInflictingItem {
             bl = true;
         }
         if (!(bl || mobEntity instanceof WitherEntity || mobEntity instanceof EnderDragonEntity || mobEntity instanceof AmbientEntity))
-            mobEntity.addStatusEffect(new StatusEffectInstance(RegistryEntry.of(StatusEffectRegistry.CHARMED), duration, amplifier));
+            mobEntity.addStatusEffect(new StatusEffectInstance(StatusEffectRegistry.CHARMED.getEntry(), duration, amplifier));
     }
 
     @Override

@@ -3,8 +3,9 @@ package dev.timefall.mcdar.artifacts;
 import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
+import dev.timefall.mcdar.artifacts.artifact_types.ArtifactDefensiveItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.effects.EnchantmentEffects;
+import dev.timefall.mcdar.effect.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,18 +19,16 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class SoulHealerItem extends ArtifactDefensiveItem{
+public class SoulHealerItem extends ArtifactDefensiveItem {
     public SoulHealerItem() {
-        super(
-                McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SOUL_HEALER_STATS.mcdar$getDurability()
-        );
+        super(McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SOUL_HEALER_STATS);
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
-        int experienceDrain = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SOUL_HEALER_STATS.mcdar$getInnerStat().mcdar$getExperienceDrain();
+        int experienceDrain = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SOUL_HEALER_STATS.mcdar$getExperienceDrain();
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SOUL_HEALER_STATS.mcdar$getMaxCooldownEnchantmentTime();
         int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
-        float range = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SOUL_HEALER_STATS.mcdar$getInnerStat().mcdar$getRange();
+        float range = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SOUL_HEALER_STATS.mcdar$getRange();
 
         ItemStack itemStack = user.getStackInHand(hand);
 
@@ -81,7 +80,7 @@ public class SoulHealerItem extends ArtifactDefensiveItem{
             return 0;
     }
     public static float healAlly(LivingEntity allyToBeHealed) {
-        float healingBase = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SOUL_HEALER_STATS.mcdar$getInnerStat().mcdar$getDamageOrHealingFactor();
+        float healingBase = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SOUL_HEALER_STATS.mcdar$getDamageOrHealingFactor();
         float maxHealth = allyToBeHealed.getMaxHealth();
         float lostHealth = maxHealth - allyToBeHealed.getHealth();
         float healedAmount = Math.min(

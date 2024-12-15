@@ -1,8 +1,9 @@
 package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.CleanlinessHelper;
+import dev.timefall.mcdar.artifacts.artifact_types.ArtifactAgilityItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.effects.EnchantmentEffects;
+import dev.timefall.mcdar.effect.EnchantmentEffects;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -14,19 +15,17 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class GhostCloakItem extends ArtifactAgilityItem{
+public class GhostCloakItem extends ArtifactAgilityItem {
     public GhostCloakItem() {
-        super(
-                McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().GHOST_CLOAK_STATS.mcdar$getDurability()
-        );
+        super(McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().GHOST_CLOAK_STATS);
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
 
-        int duration = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().GHOST_CLOAK_STATS.mcdar$getInnerStat().mcdar$getDuration();
-        int amplifier = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().GHOST_CLOAK_STATS.mcdar$getInnerStat().mcdar$getAmplifier();
-        int amplifier2 = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().GHOST_CLOAK_STATS.mcdar$getInnerStat().mcdar$getAmplifier2();
-        int amplifier3 = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().GHOST_CLOAK_STATS.mcdar$getInnerStat().mcdar$getAmplifier3();
+        int duration = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().GHOST_CLOAK_STATS.mcdar$getDuration();
+        int amplifier = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().GHOST_CLOAK_STATS.mcdar$getAmplifier();
+        int amplifier2 = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().GHOST_CLOAK_STATS.mcdar$getAmplifier2();
+        int amplifier3 = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().GHOST_CLOAK_STATS.mcdar$getAmplifier3();
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().GHOST_CLOAK_STATS.mcdar$getMaxCooldownEnchantmentTime();
         int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 

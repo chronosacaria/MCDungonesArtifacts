@@ -24,6 +24,7 @@ public class AbilityHelper {
         return false;
     }
 
+    //also could be a tag
     private static boolean isVillagerOrIronGolem(LivingEntity nearbyEntity) {
         return (nearbyEntity instanceof VillagerEntity) || (nearbyEntity instanceof IronGolemEntity);
     }
@@ -55,11 +56,13 @@ public class AbilityHelper {
         return false;
     }
 
+    //Recommend making into a tag
     public static final List<ItemStack> SATCHEL_OF_ELIXIRS_LIST = List.of(
             PotionContentsComponent.createStack(Items.POTION, Potions.STRENGTH),
             PotionContentsComponent.createStack(Items.POTION, Potions.SWIFTNESS),
             PotionContentsComponent.createStack(Items.POTION, Potions.INVISIBILITY));
 
+    //recommend making into a tag
     public static final List<Item> SATCHEL_OF_SNACKS_LIST = Collections.unmodifiableList(Arrays.asList(
             Items.APPLE, Items.BREAD, Items.COOKED_SALMON, Items.COOKED_PORKCHOP, Items.COOKED_MUTTON,
             Items.COOKED_COD, Items.COOKED_COD, Items.COOKED_RABBIT, Items.COOKED_CHICKEN, Items.COOKED_BEEF,

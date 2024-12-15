@@ -1,7 +1,7 @@
 package dev.timefall.mcdar.client;
 
 import dev.timefall.mcdar.ModConstants;
-import dev.timefall.mcdar.registry.SummonedEntityRenderRegistryFabric;
+import dev.timefall.mcdar.client.registry.SummonedEntityRenderRegistryFabric;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

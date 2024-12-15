@@ -3,11 +3,9 @@ package dev.timefall.mcdar.config.artifact_types;
 import me.fzzyhmstrs.fzzy_config.annotations.Action;
 import me.fzzyhmstrs.fzzy_config.annotations.IgnoreVisibility;
 import me.fzzyhmstrs.fzzy_config.annotations.RequiresAction;
+import me.fzzyhmstrs.fzzy_config.annotations.Translation;
 import me.fzzyhmstrs.fzzy_config.util.Walkable;
 import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedInt;
-import net.minecraft.util.Identifier;
-
-import java.util.Set;
 
 //ComplexArtifactStats<T extends Walkable>(...) extends ArtifactStats
 
@@ -15,24 +13,31 @@ import java.util.Set;
 public class ArtifactStats implements Walkable {
 
     // The visual order of the elements in the config is defined by the order of the fields below
+    @Translation(prefix = "mcdar.mcdar_artifacts_stats_config.artifact_stats")
     boolean isEnabled = true;
+
+    @Translation(prefix = "mcdar.mcdar_artifacts_stats_config.artifact_stats")
     @RequiresAction(action = Action.RESTART)
     @ValidatedInt.Restrict(min = 1)
-        int durability;
+    int durability;
+
+    @Translation(prefix = "mcdar.mcdar_artifacts_stats_config.artifact_stats")
     @ValidatedInt.Restrict(min = 1)
-        int maxCooldownEnchantmentTime;
+    int maxCooldownEnchantmentTime;
+
+    @Translation(prefix = "mcdar.mcdar_artifacts_stats_config.artifact_stats")
     @RequiresAction(action = Action.RELOAD_DATA)
-        boolean isSpawnableInLoot = true;
+    boolean isSpawnableInLoot = true;
+
+    @Translation(prefix = "mcdar.mcdar_artifacts_stats_config.artifact_stats")
     @RequiresAction(action = Action.RELOAD_DATA)
     @ValidatedInt.Restrict(min = 0)
-        int generalSpawnWeight;
-    //@RequiresAction(action = Action.RELOAD_DATA)
-    //    ValidatedSet<Identifier> generalLootTables = ValidatedIdentifier.ofRegistryKey(RegistryKeys.LOOT_TABLE).toSet();
+    int generalSpawnWeight;
+
+    @Translation(prefix = "mcdar.mcdar_artifacts_stats_config.artifact_stats")
     @RequiresAction(action = Action.RELOAD_DATA)
     @ValidatedInt.Restrict(min = 0)
-        int dungeonSpawnWeight;
-    //@RequiresAction(action = Action.RELOAD_DATA)
-    //    ValidatedSet<Identifier> dungeonLootTables = ValidatedIdentifier.ofDynamicKey(RegistryKeys.LOOT_TABLE, "mcdar_artifacts_stats", (id, entry) -> true).toSet();
+    int dungeonSpawnWeight;
 
     public boolean mcdar$getIsEnabled() {
         return isEnabled;
@@ -57,26 +62,17 @@ public class ArtifactStats implements Walkable {
     public int mcdar$getDungeonArtifactSpawnWeight() {
         return dungeonSpawnWeight;
     }
-    //public Set<Identifier> mcdar$getGeneralLootTables() {
-    //    return generalLootTables;
-    //}
-
-    //public Set<Identifier> mcdar$getDungeonLootTables() {
-    //    return dungeonLootTables;
-    //}
 
     @SuppressWarnings("unused")
     public ArtifactStats() {
     }
 
-    public ArtifactStats(boolean isEnabled, boolean isSpawnableInLoot, int durability, int maxCooldownEnchantmentTime, int generalSpawnWeight, int dungeonSpawnWeight, Set<Identifier> generalLootTables, Set<Identifier> dungeonLootTables) {
+    public ArtifactStats(boolean isEnabled, boolean isSpawnableInLoot, int durability, int maxCooldownEnchantmentTime, int generalSpawnWeight, int dungeonSpawnWeight) {
         this.isEnabled = isEnabled;
         this.durability = durability;
         this.maxCooldownEnchantmentTime = maxCooldownEnchantmentTime;
         this.isSpawnableInLoot = isSpawnableInLoot;
         this.generalSpawnWeight = generalSpawnWeight;
         this.dungeonSpawnWeight = dungeonSpawnWeight;
-        //this.generalLootTables.validateAndSet(generalLootTables);
-        //this.dungeonLootTables.validateAndSet(dungeonLootTables);
     }
 }

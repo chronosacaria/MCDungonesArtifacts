@@ -3,8 +3,9 @@ package dev.timefall.mcdar.artifacts;
 import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
+import dev.timefall.mcdar.artifacts.artifact_types.ArtifactAgilityItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.effects.EnchantmentEffects;
+import dev.timefall.mcdar.effect.EnchantmentEffects;
 import dev.timefall.mcdar.registry.StatusEffectRegistry;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -13,7 +14,6 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -22,11 +22,9 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class LightFeatherItem extends ArtifactAgilityItem{
+public class LightFeatherItem extends ArtifactAgilityItem {
     public LightFeatherItem() {
-        super(
-                McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().LIGHT_FEATHER_STATS.mcdar$getDurability()
-        );
+        super(McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().LIGHT_FEATHER_STATS);
     }
 
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
@@ -42,21 +40,21 @@ public class LightFeatherItem extends ArtifactAgilityItem{
 
             nearbyEntity.addStatusEffect(
                     new StatusEffectInstance(
-                            RegistryEntry.of(StatusEffectRegistry.STUNNED),
-                            McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getInnerStat().mcdar$getDuration(),
-                            McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getInnerStat().mcdar$getAmplifier()
+                            StatusEffectRegistry.STUNNED.getEntry(),
+                            McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getDuration(),
+                            McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getAmplifier()
                     ));
             nearbyEntity.addStatusEffect(
                     new StatusEffectInstance(
                             StatusEffects.NAUSEA,
-                            McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getInnerStat().mcdar$getDuration(),
-                            McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getInnerStat().mcdar$getAmplifier2()
+                            McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getDuration(),
+                            McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getAmplifier2()
                     ));
             nearbyEntity.addStatusEffect(
                     new StatusEffectInstance(
                             StatusEffects.SLOWNESS,
-                            McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getInnerStat().mcdar$getDuration(),
-                            McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getInnerStat().mcdar$getAmplifier3()
+                            McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getDuration(),
+                            McdarArtifactsStatsConfig.CONFIG.mcdar$getAgilityArtifactStats().DEATH_CAP_MUSHROOM_STATS.mcdar$getAmplifier3()
                     ));
         }
 

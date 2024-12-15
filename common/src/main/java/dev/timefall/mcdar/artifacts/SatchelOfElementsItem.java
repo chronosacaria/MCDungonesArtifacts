@@ -2,8 +2,9 @@ package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
+import dev.timefall.mcdar.artifacts.artifact_types.ArtifactStatusInflictingItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.effects.EnchantmentEffects;
+import dev.timefall.mcdar.effect.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -15,11 +16,9 @@ import net.minecraft.util.Hand;
 
 import java.util.List;
 
-public class SatchelOfElementsItem extends ArtifactStatusInflictingItem{
+public class SatchelOfElementsItem extends ArtifactStatusInflictingItem {
     public SatchelOfElementsItem() {
-        super(
-                McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SATCHEL_OF_ELEMENTS_STATS.mcdar$getDurability()
-        );
+        super(McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SATCHEL_OF_ELEMENTS_STATS);
     }
 
     @Override
@@ -29,13 +28,13 @@ public class SatchelOfElementsItem extends ArtifactStatusInflictingItem{
             if (user != null) {
                 Hand hand = user.getActiveHand();
                 ItemStack itemStack = user.getStackInHand(hand);
-                int experienceDrain = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SATCHEL_OF_ELEMENTS_STATS.mcdar$getInnerStat().mcdar$getExperienceDrain();
-                float damage = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SATCHEL_OF_ELEMENTS_STATS.mcdar$getInnerStat().mcdar$getDamageOrHealingFactor();
-                float range = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SATCHEL_OF_ELEMENTS_STATS.mcdar$getInnerStat().mcdar$getRange();
-                int duration = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SATCHEL_OF_ELEMENTS_STATS.mcdar$getInnerStat().mcdar$getDuration();
-                int amplifier = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SATCHEL_OF_ELEMENTS_STATS.mcdar$getInnerStat().mcdar$getAmplifier();
-                int amplifier2 = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SHOCK_POWDER_STATS.mcdar$getInnerStat().mcdar$getAmplifier2();
-                int amplifier3 = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SHOCK_POWDER_STATS.mcdar$getInnerStat().mcdar$getAmplifier3();
+                int experienceDrain = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SATCHEL_OF_ELEMENTS_STATS.mcdar$getExperienceDrain();
+                float damage = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SATCHEL_OF_ELEMENTS_STATS.mcdar$getDamageOrHealingFactor();
+                float range = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SATCHEL_OF_ELEMENTS_STATS.mcdar$getRange();
+                int duration = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SATCHEL_OF_ELEMENTS_STATS.mcdar$getDuration();
+                int amplifier = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SATCHEL_OF_ELEMENTS_STATS.mcdar$getAmplifier();
+                int amplifier2 = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SHOCK_POWDER_STATS.mcdar$getAmplifier2();
+                int amplifier3 = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SHOCK_POWDER_STATS.mcdar$getAmplifier3();
                 int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().SATCHEL_OF_ELEMENTS_STATS.mcdar$getMaxCooldownEnchantmentTime();
                 int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, user.getWorld());
 

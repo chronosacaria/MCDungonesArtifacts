@@ -1,6 +1,6 @@
 package dev.timefall.mcdar.api;
 
-import dev.timefall.mcdar.effects.EnchantmentEffects;
+import dev.timefall.mcdar.effect.EnchantmentEffects;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -8,6 +8,7 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -148,49 +149,14 @@ public class CleanlinessHelper {
                 ? playerEntity.getOffHandStack()
                 : playerEntity.getMainHandStack();
     }
-/*
-    public static int mcdar$artifactIDToItemCooldownTime(Item artifactItem) {
-        int cooldownLevel = EnchantmentHelper.getLevel(RegistryEntry.of(EnchantsRegistry.COOLDOWN), artifactItem.getDefaultStack());
-        if (artifactItem instanceof IArtifactItem) {
-            for (AgilityArtifactID agilityArtifactID : AgilityArtifactID.values())
-                if (artifactItem.asItem() == agilityArtifactID.mcdar$getItem()
-                        && McdarArtifactsStatsConfig.CONFIG.AGILITY_ARTIFACT_STATS.get(agilityArtifactID)
-                            .mcdar$getIsEnabled())
-                    return McdarArtifactsStatsConfig.CONFIG.AGILITY_ARTIFACT_STATS.get(agilityArtifactID)
-                            .mcdar$getMaxCooldownEnchantmentTime();
-            for (DamagingArtifactID damagingArtifactID : DamagingArtifactID.values())
-                if (artifactItem.asItem() == damagingArtifactID.mcdar$getItem()
-                        && McdarArtifactsStatsConfig.CONFIG.DAMAGING_ARTIFACT_STATS.get(damagingArtifactID)
-                            .mcdar$getIsEnabled())
-                    return McdarArtifactsStatsConfig.CONFIG.DAMAGING_ARTIFACT_STATS.get(damagingArtifactID)
-                            .mcdar$getMaxCooldownEnchantmentTime();
-            for (DefensiveArtifactID defensiveArtifactID : DefensiveArtifactID.values())
-                if (artifactItem.asItem() == defensiveArtifactID.mcdar$getItem()
-                        && McdarArtifactsStatsConfig.CONFIG.DEFENSIVE_ARTIFACT_STATS.get(defensiveArtifactID)
-                            .mcdar$getIsEnabled() && artifactItem.asItem() != DefensiveArtifactID.SOUL_HEALER.mcdar$getItem())
-                    return McdarArtifactsStatsConfig.CONFIG.DEFENSIVE_ARTIFACT_STATS.get(defensiveArtifactID)
-                            .mcdar$getMaxCooldownEnchantmentTime();
-            for (QuiverArtifactID quiverArtifactID : QuiverArtifactID.values())
-                if (artifactItem.asItem() == quiverArtifactID.mcdar$getItem()
-                        && McdarArtifactsStatsConfig.CONFIG.QUIVER_ARTIFACT_STATS.get(quiverArtifactID)
-                            .mcdar$getIsEnabled())
-                    return (cooldownLevel + 1) * McdarArtifactsStatsConfig.CONFIG.QUIVER_ARTIFACT_STATS.get(quiverArtifactID)
-                            .mcdar$getMaxCooldownEnchantmentTime();
-            for (StatusInflictingArtifactID statusInflictingArtifactID : StatusInflictingArtifactID.values())
-                if (artifactItem.asItem() == statusInflictingArtifactID.mcdar$getItem()
-                        && McdarArtifactsStatsConfig.CONFIG.STATUS_INFLICTING_ARTIFACT_STATS.get(statusInflictingArtifactID)
-                            .mcdar$getIsEnabled())
-                    return McdarArtifactsStatsConfig.CONFIG.STATUS_INFLICTING_ARTIFACT_STATS.get(statusInflictingArtifactID)
-                            .mcdar$getMaxCooldownEnchantmentTime();
-            for (SummoningArtifactID summoningArtifactID : SummoningArtifactID.values())
-                if (artifactItem.asItem() == summoningArtifactID.mcdar$getItem()
-                        && McdarArtifactsStatsConfig.CONFIG.SUMMONING_ARTIFACT_STATS.get(summoningArtifactID)
-                            .mcdar$getIsEnabled())
-                    return McdarArtifactsStatsConfig.CONFIG.SUMMONING_ARTIFACT_STATS.get(summoningArtifactID)
-                            .mcdar$getMaxCooldownEnchantmentTime();
-        //}
-        return 0;
-    }
 
- */
+    @SuppressWarnings("SizeReplaceableByIsEmpty")
+    public static boolean mcdar$isValidForBeastEffects(List<StatusEffectInstance> potionEffects) {
+        return potionEffects.stream().filter(
+                (instance) -> instance.getEffectType()
+                        == StatusEffects.INSTANT_HEALTH
+                            || instance.getEffectType()
+                        == StatusEffects.REGENERATION
+        ).toList().size() > 0;
+    }
 }

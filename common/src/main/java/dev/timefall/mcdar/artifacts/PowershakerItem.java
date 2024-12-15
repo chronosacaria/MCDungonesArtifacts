@@ -1,8 +1,9 @@
 package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.CleanlinessHelper;
+import dev.timefall.mcdar.artifacts.artifact_types.ArtifactDamagingItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.effects.EnchantmentEffects;
+import dev.timefall.mcdar.effect.EnchantmentEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
@@ -15,9 +16,7 @@ import java.util.List;
 
 public class PowershakerItem extends ArtifactDamagingItem {
     public PowershakerItem() {
-        super(
-                McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().POWERSHAKER_STATS.mcdar$getDurability()
-        );
+        super(McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().POWERSHAKER_STATS);
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand) {

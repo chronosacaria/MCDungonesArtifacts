@@ -2,8 +2,9 @@ package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.AOECloudHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
+import dev.timefall.mcdar.artifacts.artifact_types.ArtifactDefensiveItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.effects.EnchantmentEffects;
+import dev.timefall.mcdar.effect.EnchantmentEffects;
 import dev.timefall.mcdar.registry.StatusEffectRegistry;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -11,7 +12,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -20,18 +20,16 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.List;
 
-public class TotemOfShieldingItem extends ArtifactDefensiveItem{
+public class TotemOfShieldingItem extends ArtifactDefensiveItem {
     public TotemOfShieldingItem() {
-        super(
-                McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().TOTEM_OF_SHIELDING_STATS.mcdar$getDurability()
-        );
+        super(McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().TOTEM_OF_SHIELDING_STATS);
     }
 
     public ActionResult useOnBlock (ItemUsageContext itemUsageContext){
-        float cloudRadius = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().TOTEM_OF_SHIELDING_STATS.mcdar$getInnerStat().mcdar$getCloudRadius();
-        int cloudDuration = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().TOTEM_OF_SHIELDING_STATS.mcdar$getInnerStat().mcdar$getCloudDuration();
-        int effectDuration = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().TOTEM_OF_SHIELDING_STATS.mcdar$getInnerStat().mcdar$getEffectDuration();
-        int amplifier = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().TOTEM_OF_SHIELDING_STATS.mcdar$getInnerStat().mcdar$getAmplifier();
+        float cloudRadius = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().TOTEM_OF_SHIELDING_STATS.mcdar$getCloudRadius();
+        int cloudDuration = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().TOTEM_OF_SHIELDING_STATS.mcdar$getCloudDuration();
+        int effectDuration = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().TOTEM_OF_SHIELDING_STATS.mcdar$getEffectDuration();
+        int amplifier = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().TOTEM_OF_SHIELDING_STATS.mcdar$getAmplifier();
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().TOTEM_OF_SHIELDING_STATS.mcdar$getMaxCooldownEnchantmentTime();
         int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, itemUsageContext.getPlayer(), itemUsageContext.getWorld());
 
@@ -53,7 +51,7 @@ public class TotemOfShieldingItem extends ArtifactDefensiveItem{
                         cloudRadius,
                         cloudDuration,
                         new StatusEffectInstance(
-                                RegistryEntry.of(StatusEffectRegistry.SHIELDING),
+                                StatusEffectRegistry.SHIELDING.getEntry(),
                                 effectDuration,
                                 amplifier
                         )

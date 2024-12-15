@@ -6,13 +6,12 @@ import dev.timefall.mcdar.config.item_sections.*;
 import me.fzzyhmstrs.fzzy_config.annotations.IgnoreVisibility;
 import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import me.fzzyhmstrs.fzzy_config.config.Config;
-import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedList;
+import me.fzzyhmstrs.fzzy_config.validation.collection.ValidatedSet;
 import me.fzzyhmstrs.fzzy_config.validation.minecraft.ValidatedIdentifier;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,25 +21,31 @@ public class McdarArtifactsStatsConfig extends Config {
 
     public static final McdarArtifactsStatsConfig CONFIG = ConfigApiJava.registerAndLoadConfig(McdarArtifactsStatsConfig::new);
 
-    public float ARTIFACT_GENERAL_SPAWN_CHANCE = 0.25f;
-    public float ARTIFACT_DUNGEON_SPAWN_CHANCE = 0.1f;
+    private float artifactGeneralSpawnChance = 0.25f;
+    private float artifactDungeonSpawnChance = 0.1f;
 
     transient Set<Identifier> villager = GroupedObjectsHelper.VILLAGER_ARTIFACT_GENERAL_LOOT_TABLES.stream().map(RegistryKey::getValue).collect(Collectors.toSet());
     transient Set<Identifier> illager = GroupedObjectsHelper.ILLAGER_ARTIFACT_GENERAL_LOOT_TABLES.stream().map(RegistryKey::getValue).collect(Collectors.toSet());
     transient Set<Identifier> dungeon = GroupedObjectsHelper.ALL_ARTIFACTS_DUNGEON_LOOT_TABLES.stream().map(RegistryKey::getValue).collect(Collectors.toSet());
 
     // Determines if the table is valid
-    private ValidatedList<Identifier> villagerLootTables = ValidatedIdentifier.ofDynamicKey(RegistryKeys.LOOT_TABLE, "mcdar_artifact_stats_villager_loot_tables", (id, entry) -> true).toList(villager);
-    private ValidatedList<Identifier> illagerLootTables = ValidatedIdentifier.ofDynamicKey(RegistryKeys.LOOT_TABLE, "mcdar_artifacts_stats_illager_loot_tables", (id, entry) -> true).toList(illager);
-    private ValidatedList<Identifier> dungeonLootTables = ValidatedIdentifier.ofDynamicKey(RegistryKeys.LOOT_TABLE, "mcdar_artifacts_stats_dungeon_loot_tables", (id, entry) -> true).toList(dungeon);
+    private ValidatedSet<Identifier> villagerLootTables = ValidatedIdentifier.ofDynamicKey(RegistryKeys.LOOT_TABLE, "mcdar_artifact_stats_villager_loot_tables", (id, entry) -> true).toSet(villager);
+    private ValidatedSet<Identifier> illagerLootTables = ValidatedIdentifier.ofDynamicKey(RegistryKeys.LOOT_TABLE, "mcdar_artifacts_stats_illager_loot_tables", (id, entry) -> true).toSet(illager);
+    private ValidatedSet<Identifier> dungeonLootTables = ValidatedIdentifier.ofDynamicKey(RegistryKeys.LOOT_TABLE, "mcdar_artifacts_stats_dungeon_loot_tables", (id, entry) -> true).toSet(dungeon);
 
-    private DamagingArtifactStats damagingArtifactStats = new DamagingArtifactStats(villager, illager, dungeon);
-    private AgilityArtifactStats agilityArtifactStats = new AgilityArtifactStats(villager, illager, dungeon);
-    private DefensiveArtifactStats defensiveArtifactStats = new DefensiveArtifactStats(villager, illager, dungeon);
-    private QuiverArtifactStats quiverArtifactStats = new QuiverArtifactStats(villager, illager, dungeon);
-    private StatusInflictingArtifactStats statusInflictingArtifactStats = new StatusInflictingArtifactStats(villager, illager, dungeon);
-    private SummoningArtifactStats summoningArtifactStats = new SummoningArtifactStats(villager, illager, dungeon);
+    private DamagingArtifactStats damagingArtifactStats = new DamagingArtifactStats();
+    private AgilityArtifactStats agilityArtifactStats = new AgilityArtifactStats();
+    private DefensiveArtifactStats defensiveArtifactStats = new DefensiveArtifactStats();
+    private QuiverArtifactStats quiverArtifactStats = new QuiverArtifactStats();
+    private StatusInflictingArtifactStats statusInflictingArtifactStats = new StatusInflictingArtifactStats();
+    private SummoningArtifactStats summoningArtifactStats = new SummoningArtifactStats();
 
+    public float mcdar$getGeneralSpawnChance() {
+        return artifactGeneralSpawnChance;
+    }
+    public float mcdar$getDungeonSpawnChance() {
+        return artifactDungeonSpawnChance;
+    }
     public DamagingArtifactStats mcdar$getDamagingArtifactStats() {
         return damagingArtifactStats;
     }
@@ -61,15 +66,15 @@ public class McdarArtifactsStatsConfig extends Config {
         return statusInflictingArtifactStats;
     }
 
-    public List<Identifier> mcdar$getVillagerLootTables() {
+    public Set<Identifier> mcdar$getVillagerLootTables() {
         return villagerLootTables;
     }
 
-    public List<Identifier> mcdar$getIllagerLootTables() {
+    public Set<Identifier> mcdar$getIllagerLootTables() {
         return illagerLootTables;
     }
 
-    public List<Identifier> mcdar$getDungeonLootTables() {
+    public Set<Identifier> mcdar$getDungeonLootTables() {
         return dungeonLootTables;
     }
 
@@ -78,6 +83,6 @@ public class McdarArtifactsStatsConfig extends Config {
     }
 
     public McdarArtifactsStatsConfig() {
-        super(ModConstants.ID("mcdar_artifacts_stats_config"));
+        super(ModConstants.id("mcdar_artifacts_stats_config"));
     }
 }

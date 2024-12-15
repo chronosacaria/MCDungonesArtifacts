@@ -1,7 +1,6 @@
 package dev.timefall.mcdar.statuseffect;
 
-import dev.timefall.mcdar.ModConstants;
-import dev.timefall.mcdar.goals.LoveMedallionAttackGoal;
+import dev.timefall.mcdar.goal.LoveMedallionAttackGoal;
 import dev.timefall.mcdar.mixin.MobEntityAccessor;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
@@ -10,16 +9,13 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
 
 public class CharmedStatusEffect extends StatusEffect {
     private LivingEntity entity;
 
-    public CharmedStatusEffect(StatusEffectCategory statusEffectCategory, int color, String id) {
+    public CharmedStatusEffect(StatusEffectCategory statusEffectCategory, int color) {
         super(statusEffectCategory, color);
-        Registry.register(Registries.STATUS_EFFECT, Identifier.of(ModConstants.MOD_ID, id), this);
+        //Registry.register(Registries.STATUS_EFFECT, Identifier.of(ModConstants.MOD_ID, id), this);
     }
 
     private static Goal inLoveIdiot;

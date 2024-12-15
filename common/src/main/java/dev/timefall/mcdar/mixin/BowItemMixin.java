@@ -19,7 +19,7 @@ public abstract class BowItemMixin {
     @Inject(method = "shoot", at = @At(value = "HEAD"))
     public void onFlamingQuiverArrowLoosing(LivingEntity shooter, ProjectileEntity projectile, int index, float speed, float divergence, float yaw, LivingEntity target, CallbackInfo ci){
         if (McdarArtifactsStatsConfig.CONFIG.mcdar$getQuiverArtifactStats().FLAMING_QUIVER_STATS.mcdar$getIsEnabled()){
-            if (shooter.getOffHandStack().isOf(ArtifactsRegistry.FLAMING_QUIVER)) {
+            if (shooter.getOffHandStack().isOf(ArtifactsRegistry.FLAMING_QUIVER.get())) {
                 if (shooter instanceof PlayerEntity playerEntity) {
                     float effectTimer = playerEntity.getItemCooldownManager().getCooldownProgress(shooter.getOffHandStack().getItem(), 0);
                     if (effectTimer > 0) {

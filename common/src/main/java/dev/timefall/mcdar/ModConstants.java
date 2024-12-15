@@ -10,10 +10,10 @@ import org.apache.logging.log4j.Logger;
 public class ModConstants {
 
     public static final String MOD_ID = "mcdar";
-    public static Identifier ID (String path){
+    public static Identifier id(String path){
         return Identifier.of(MOD_ID, path);
     }
-    public static final RegistryKey<ItemGroup> ARTIFACTS = RegistryKey.of(RegistryKeys.ITEM_GROUP, ModConstants.ID("artifacts"));
+    public static final RegistryKey<ItemGroup> ARTIFACTS = RegistryKey.of(RegistryKeys.ITEM_GROUP, ModConstants.id("artifacts"));
 
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 

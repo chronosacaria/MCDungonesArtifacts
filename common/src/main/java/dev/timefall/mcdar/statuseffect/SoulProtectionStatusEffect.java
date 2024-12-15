@@ -1,17 +1,13 @@
 package dev.timefall.mcdar.statuseffect;
 
-import dev.timefall.mcdar.ModConstants;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
 
 public class SoulProtectionStatusEffect extends StatusEffect {
 
-    public SoulProtectionStatusEffect(StatusEffectCategory type, int color, String id) {
+    public SoulProtectionStatusEffect(StatusEffectCategory type, int color) {
         super(type, color);
-        Registry.register(Registries.STATUS_EFFECT, Identifier.of(ModConstants.MOD_ID, id), this);
+        //Registry.register(Registries.STATUS_EFFECT, Identifier.of(ModConstants.MOD_ID, id), this);
     }
 
     @Override

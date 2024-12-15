@@ -70,6 +70,10 @@ allprojects {
                 includeGroup "maven.modrinth"
             }
         }
+        maven {
+            name = "FzzyMaven"
+            url = "https://maven.fzzyhmstrs.me/"
+        }
     }
 
     tasks.withType(JavaCompile).configureEach {

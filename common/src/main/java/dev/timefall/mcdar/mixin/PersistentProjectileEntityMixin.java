@@ -36,10 +36,10 @@ public class PersistentProjectileEntityMixin {
                 if (CleanlinessHelper.isCoolingDown(shooter, offhand.getItem())) {
 
                     if (McdarArtifactsStatsConfig.CONFIG.mcdar$getQuiverArtifactStats().THUNDERING_QUIVER_STATS.mcdar$getIsEnabled())
-                        if (offhand.isOf(ArtifactsRegistry.THUNDERING_QUIVER))
+                        if (offhand.isOf(ArtifactsRegistry.THUNDERING_QUIVER.get()))
                             AOEHelper.electrocute(livingEntity, (float) persistentProjectileEntity.getDamage());
                     if (McdarArtifactsStatsConfig.CONFIG.mcdar$getQuiverArtifactStats().TORMENT_QUIVER_STATS.mcdar$getIsEnabled())
-                        if (offhand.isOf(ArtifactsRegistry.TORMENT_QUIVER)) {
+                        if (offhand.isOf(ArtifactsRegistry.TORMENT_QUIVER.get())) {
 
                             // TODO: There's gotta be a better way to do this
                             double d = Math.max(0.0, 1.0 - livingEntity.getAttributeValue(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE));
@@ -53,7 +53,7 @@ public class PersistentProjectileEntityMixin {
                 }
             }
             // * Shielding Status Effect * //
-            if (livingEntity.hasStatusEffect(RegistryEntry.of(StatusEffectRegistry.SHIELDING))){
+            if (livingEntity.hasStatusEffect(StatusEffectRegistry.SHIELDING.getEntry())){
                 if (ci.isCancellable())
                     ci.cancel();
                 ProjectileEffectHelper.ricochetArrowLikeShield(persistentProjectileEntity);
@@ -69,7 +69,7 @@ public class PersistentProjectileEntityMixin {
             if (ppe.getOwner() instanceof PlayerEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 
-                if (offhand.isOf(ArtifactsRegistry.TORMENT_QUIVER)) {
+                if (offhand.isOf(ArtifactsRegistry.TORMENT_QUIVER.get())) {
                     if (CleanlinessHelper.isCoolingDown(shooter, offhand.getItem())) {
                         if (ci.isCancellable()) {
                             ci.cancel();
@@ -88,7 +88,7 @@ public class PersistentProjectileEntityMixin {
             if (ppe.getOwner() instanceof PlayerEntity shooter) {
                 ItemStack offhand = shooter.getOffHandStack();
 
-                if (offhand.isOf(ArtifactsRegistry.HARPOON_QUIVER)) {
+                if (offhand.isOf(ArtifactsRegistry.HARPOON_QUIVER.get())) {
                     if (CleanlinessHelper.isCoolingDown(shooter, offhand.getItem())) {
                         if (ppe.isTouchingWater()) {
                             float normDrag = cir.getReturnValueF();

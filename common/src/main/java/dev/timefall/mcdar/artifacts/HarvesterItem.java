@@ -3,8 +3,9 @@ package dev.timefall.mcdar.artifacts;
 import dev.timefall.mcdar.api.AOECloudHelper;
 import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
+import dev.timefall.mcdar.artifacts.artifact_types.ArtifactDamagingItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.effects.EnchantmentEffects;
+import dev.timefall.mcdar.effect.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -18,20 +19,18 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class HarvesterItem extends ArtifactDamagingItem{
+public class HarvesterItem extends ArtifactDamagingItem {
     public HarvesterItem() {
-        super(
-                McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().HARVESTER_STATS.mcdar$getDurability()
-        );
+        super(McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().HARVESTER_STATS);
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
-        int experienceDrain = McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().HARVESTER_STATS.mcdar$getInnerStat().mcdar$getExperienceDrain();
+        int experienceDrain = McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().HARVESTER_STATS.mcdar$getExperienceDrain();
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().HARVESTER_STATS.mcdar$getMaxCooldownEnchantmentTime();
         int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
-        int damage = McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().HARVESTER_STATS.mcdar$getInnerStat().mcdar$getDamageOrHealing();
-        float range = McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().HARVESTER_STATS.mcdar$getInnerStat().mcdar$getRange();
+        int damage = McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().HARVESTER_STATS.mcdar$getDamageOrHealing();
+        float range = McdarArtifactsStatsConfig.CONFIG.mcdar$getDamagingArtifactStats().HARVESTER_STATS.mcdar$getRange();
 
         if (user.totalExperience >= experienceDrain || user.isCreative()) {
             CleanlinessHelper.playCenteredSound(user, SoundEvents.ENTITY_GENERIC_EXPLODE.value(), 1.0F, 1.0F);

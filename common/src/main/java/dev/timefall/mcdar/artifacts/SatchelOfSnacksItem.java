@@ -2,8 +2,9 @@ package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
+import dev.timefall.mcdar.artifacts.artifact_types.ArtifactDefensiveItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.effects.EnchantmentEffects;
+import dev.timefall.mcdar.effect.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -17,11 +18,9 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class SatchelOfSnacksItem extends ArtifactDefensiveItem{
+public class SatchelOfSnacksItem extends ArtifactDefensiveItem {
     public SatchelOfSnacksItem() {
-        super(
-                McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SATCHEL_OF_SNACKS_STATS.mcdar$getDurability()
-        );
+        super(McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().SATCHEL_OF_SNACKS_STATS);
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){

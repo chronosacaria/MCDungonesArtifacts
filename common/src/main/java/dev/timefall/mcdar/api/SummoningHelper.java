@@ -1,7 +1,7 @@
 package dev.timefall.mcdar.api;
 
 import dev.timefall.mcdar.api.interfaces.Summonable;
-import dev.timefall.mcdar.entities.SummonedEntityType;
+import dev.timefall.mcdar.entity.SummonedEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

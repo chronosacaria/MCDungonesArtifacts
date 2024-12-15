@@ -3,8 +3,9 @@ package dev.timefall.mcdar.artifacts;
 import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
+import dev.timefall.mcdar.artifacts.artifact_types.ArtifactDefensiveItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.effects.EnchantmentEffects;
+import dev.timefall.mcdar.effect.EnchantmentEffects;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -28,16 +29,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-public class WindHornItem extends ArtifactDefensiveItem{
+public class WindHornItem extends ArtifactDefensiveItem {
 
     private static final String INSTRUMENT_KEY = "instrument";
     private final TagKey<Instrument> instrumentTag;
 
 
     public WindHornItem(TagKey<Instrument> instrumentTag) {
-        super(
-                McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().WIND_HORN_STATS.mcdar$getDurability()
-        );
+        super(McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().WIND_HORN_STATS);
         this.instrumentTag = instrumentTag;
     }
 
@@ -51,9 +50,9 @@ public class WindHornItem extends ArtifactDefensiveItem{
             Instrument instrument = optional.get().value();
             user.setCurrentHand(hand);
             WindHornItem.playSound(world, user, instrument);
-            for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(user, McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().WIND_HORN_STATS.mcdar$getInnerStat().mcdar$getRange(),
+            for (LivingEntity nearbyEntity : AOEHelper.getEntitiesByPredicate(user, McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().WIND_HORN_STATS.mcdar$getRange(),
                     (nearbyEntity) -> nearbyEntity != user && !AbilityHelper.isPetOf(nearbyEntity, user) && nearbyEntity.isAlive())) {
-                AOEHelper.knockbackNearbyEnemies(user, nearbyEntity, McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().WIND_HORN_STATS.mcdar$getInnerStat().mcdar$getDamage());
+                AOEHelper.knockbackNearbyEnemies(user, nearbyEntity, McdarArtifactsStatsConfig.CONFIG.mcdar$getDefensiveArtifactStats().WIND_HORN_STATS.mcdar$getDamage());
             }
 
             if (!user.isCreative()) {

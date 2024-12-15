@@ -1,22 +1,34 @@
 package dev.timefall.mcdar.registry;
 
+import dev.timefall.mcdar.ModConstants;
 import dev.timefall.mcdar.statuseffect.CharmedStatusEffect;
 import dev.timefall.mcdar.statuseffect.ShieldingStatusEffect;
 import dev.timefall.mcdar.statuseffect.SoulProtectionStatusEffect;
 import dev.timefall.mcdar.statuseffect.StunnedStatusEffect;
+import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
+import me.fzzyhmstrs.fzzy_config.util.platform.Registrar;
+import me.fzzyhmstrs.fzzy_config.util.platform.RegistrySupplier;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.registry.Registries;
 
 public class StatusEffectRegistry {
-    public static StatusEffect CHARMED;
-    public static StatusEffect SHIELDING;
-    public static StatusEffect SOUL_PROTECTION;
-    public static StatusEffect STUNNED;
 
-    public static void register(){
-        CHARMED = new CharmedStatusEffect(StatusEffectCategory.HARMFUL, 0xC7005B, "charmed");
-        SHIELDING = new ShieldingStatusEffect(StatusEffectCategory.BENEFICIAL, 0x808080, "shielding");
-        SOUL_PROTECTION = new SoulProtectionStatusEffect(StatusEffectCategory.BENEFICIAL, 0x2552a5, "soul_protection");
-        STUNNED = new StunnedStatusEffect(StatusEffectCategory.HARMFUL, 0xFFFF00, "stunned");
+    private static final Registrar<StatusEffect> STATUS_EFFECT = ConfigApiJava.platform().createRegistrar(ModConstants.MOD_ID, Registries.STATUS_EFFECT);
+
+    public static RegistrySupplier<StatusEffect> CHARMED;
+    public static RegistrySupplier<StatusEffect> SHIELDING;
+    public static RegistrySupplier<StatusEffect> SOUL_PROTECTION;
+    public static RegistrySupplier<StatusEffect> STUNNED;
+
+    protected static RegistrySupplier<StatusEffect> registerStatus(String id, StatusEffect statusEffect) {
+        return STATUS_EFFECT.register(id, () -> statusEffect);
+    }
+
+    public static void register() {
+        CHARMED = registerStatus("charmed", new CharmedStatusEffect(StatusEffectCategory.HARMFUL, 0xC7005B));
+        SHIELDING = registerStatus("shielding", new ShieldingStatusEffect(StatusEffectCategory.BENEFICIAL, 0x808080));
+        SOUL_PROTECTION = registerStatus("soul_protection", new SoulProtectionStatusEffect(StatusEffectCategory.BENEFICIAL, 0x2552a5));
+        STUNNED = registerStatus("stunned", new StunnedStatusEffect(StatusEffectCategory.HARMFUL, 0xFFFF00));
     }
 }

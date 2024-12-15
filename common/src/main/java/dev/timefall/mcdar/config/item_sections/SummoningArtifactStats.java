@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class SummoningArtifactStats extends ConfigSection {
 
-    public SummoningArtifactStats(Set<Identifier> villager, Set<Identifier> illager, Set<Identifier> dungeon) {
+    public SummoningArtifactStats() {
         super();
         this.BUZZY_NEST_STATS = new ArtifactStats(
                 true,
@@ -16,9 +16,7 @@ public class SummoningArtifactStats extends ConfigSection {
                 8,
                 600,
                 2,
-                1,
-                villager,
-                dungeon
+                1
         );
         this.ENCHANTED_GRASS_STATS = new ArtifactStats(
                 true,
@@ -26,9 +24,7 @@ public class SummoningArtifactStats extends ConfigSection {
                 8,
                 600,
                 2,
-                1,
-                villager,
-                dungeon
+                1
         );
         this.GOLEM_KIT_STATS = new ArtifactStats(
                 true,
@@ -36,9 +32,7 @@ public class SummoningArtifactStats extends ConfigSection {
                 8,
                 600,
                 2,
-                1,
-                villager,
-                dungeon
+                1
         );
         this.TASTY_BONE_STATS = new ArtifactStats(
                 true,
@@ -46,9 +40,7 @@ public class SummoningArtifactStats extends ConfigSection {
                 8,
                 600,
                 2,
-                1,
-                villager,
-                dungeon
+                1
         );
         this.WONDERFUL_WHEAT_STATS = new ArtifactStats(
                 true,
@@ -56,9 +48,7 @@ public class SummoningArtifactStats extends ConfigSection {
                 8,
                 600,
                 2,
-                1,
-                villager,
-                dungeon
+                1
         );
     }
 

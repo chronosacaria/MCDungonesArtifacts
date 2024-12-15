@@ -20,6 +20,10 @@ repositories {
             includeGroupAndSubgroups "cpw.mods"
         }
     }
+
+    maven {
+        url "https://thedarkcolour.github.io/KotlinForForge/"
+    }
 }
 
 configurations {
@@ -42,6 +46,8 @@ dependencies {
         it.mappings("net.fabricmc:yarn:${rootProject.minecraft_version}+build.${rootProject.yarn_mappings}:v2")
         it.mappings("dev.architectury:yarn-mappings-patch-neoforge:$project.yarn_mappings_patch_neoforge_version")
     }
+
+    modImplementation "me.fzzyhmstrs:fzzy_config:${rootProject.fzzyConfigVersion}+neoforge"
 }
 
 publishMods {

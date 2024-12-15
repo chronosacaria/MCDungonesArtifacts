@@ -2,8 +2,9 @@ package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.api.SummoningHelper;
+import dev.timefall.mcdar.artifacts.artifact_types.ArtifactSummoningItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.effects.EnchantmentEffects;
+import dev.timefall.mcdar.effect.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,11 +18,9 @@ import net.minecraft.util.Hand;
 
 import java.util.List;
 
-public class EnchantedGrassItem extends ArtifactSummoningItem{
+public class EnchantedGrassItem extends ArtifactSummoningItem {
     public EnchantedGrassItem() {
-        super(
-                McdarArtifactsStatsConfig.CONFIG.mcdar$getSummoningArtifactStats().ENCHANTED_GRASS_STATS.mcdar$getDurability()
-        );
+        super(McdarArtifactsStatsConfig.CONFIG.mcdar$getSummoningArtifactStats().ENCHANTED_GRASS_STATS);
     }
 
     public ActionResult useOnBlock (ItemUsageContext itemUsageContext){

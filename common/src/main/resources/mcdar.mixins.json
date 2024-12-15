@@ -6,8 +6,6 @@
   "mixins": [
     "BowItemMixin",
     "CreeperEntityAccessor",
-    "DefaultAttributeRegistryAccessor",
-    "ItemStackMixin",
     "LivingEntityMixin",
     "MobEntityAccessor",
     "MobEntityMixin",

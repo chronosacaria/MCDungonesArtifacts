@@ -2,8 +2,9 @@ package dev.timefall.mcdar.artifacts;
 
 import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
+import dev.timefall.mcdar.artifacts.artifact_types.ArtifactStatusInflictingItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
-import dev.timefall.mcdar.effects.EnchantmentEffects;
+import dev.timefall.mcdar.effect.EnchantmentEffects;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -21,19 +22,17 @@ import net.minecraft.world.World;
 import java.util.List;
 
 
-public class GongOfWeakeningItem extends ArtifactStatusInflictingItem{
+public class GongOfWeakeningItem extends ArtifactStatusInflictingItem {
     public GongOfWeakeningItem() {
-        super(
-                McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getDurability()
-        );
+        super(McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS);
     }
 
     public TypedActionResult<ItemStack> use (World world, PlayerEntity user, Hand hand){
         ItemStack itemStack = user.getStackInHand(hand);
-        float range = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getInnerStat().mcdar$getRange();
-        int duration = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getInnerStat().mcdar$getDuration();
-        int amplifier = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getInnerStat().mcdar$getAmplifier();
-        int amplifier2 = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getInnerStat().mcdar$getAmplifier2();
+        float range = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getRange();
+        int duration = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getDuration();
+        int amplifier = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getAmplifier();
+        int amplifier2 = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getAmplifier2();
         int maxCooldownEnchantmentTime = McdarArtifactsStatsConfig.CONFIG.mcdar$getStatusInflictingArtifactStats().GONG_OF_WEAKENING_STATS.mcdar$getMaxCooldownEnchantmentTime();
         int modifiedCooldownEnchantmentTime = EnchantmentEffects.cooldownEffect(maxCooldownEnchantmentTime, user, world);
 
