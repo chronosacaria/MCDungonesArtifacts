@@ -5,16 +5,23 @@ import dev.timefall.mcdar.registry.SummonedEntityRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.render.entity.BeeEntityRenderer;
+import net.minecraft.client.render.entity.IronGolemEntityRenderer;
+import net.minecraft.client.render.entity.LlamaEntityRenderer;
+import net.minecraft.client.render.entity.WolfEntityRenderer;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
+import net.minecraft.util.DyeColor;
 
 @Environment(EnvType.CLIENT)
 public class SummonedEntityRenderRegistryFabric {
-    public static void register(){
-        EntityRendererRegistry.register(SummonedEntityRegistry.BUZZY_NEST_BEE_ENTITY, BuzzyNestBeeRenderer::new);
-        EntityRendererRegistry.register(SummonedEntityRegistry.ENCHANTED_GRASS_BLUE_SHEEP_ENTITY, EnchantedGrassBlueSheepRenderer::new);
-        EntityRendererRegistry.register(SummonedEntityRegistry.ENCHANTED_GRASS_GREEN_SHEEP_ENTITY, EnchantedGrassGreenSheepRenderer::new);
-        EntityRendererRegistry.register(SummonedEntityRegistry.ENCHANTED_GRASS_RED_SHEEP_ENTITY, EnchantedGrassRedSheepRenderer::new);
-        EntityRendererRegistry.register(SummonedEntityRegistry.GOLEM_KIT_GOLEM_ENTITY, GolemKitGolemRenderer::new);
-        EntityRendererRegistry.register(SummonedEntityRegistry.TASTY_BONE_WOLF_ENTITY, TastyBoneWolfRenderer::new);
-        EntityRendererRegistry.register(SummonedEntityRegistry.WONDERFUL_WHEAT_LLAMA_ENTITY, WonderfulWheatLlamaRenderer::new);
+    public static void register() {
+
+        EntityRendererRegistry.register(SummonedEntityRegistry.BUZZY_NEST_BEE_ENTITY, BeeEntityRenderer::new);
+        EntityRendererRegistry.register(SummonedEntityRegistry.ENCHANTED_GRASS_BLUE_SHEEP_ENTITY, context -> new EnchantedGrassSheepRenderer(context, DyeColor.BLUE));
+        EntityRendererRegistry.register(SummonedEntityRegistry.ENCHANTED_GRASS_GREEN_SHEEP_ENTITY, context -> new EnchantedGrassSheepRenderer(context,DyeColor.GREEN));
+        EntityRendererRegistry.register(SummonedEntityRegistry.ENCHANTED_GRASS_RED_SHEEP_ENTITY, context -> new EnchantedGrassSheepRenderer(context, DyeColor.RED));
+        EntityRendererRegistry.register(SummonedEntityRegistry.GOLEM_KIT_GOLEM_ENTITY, IronGolemEntityRenderer::new);
+        EntityRendererRegistry.register(SummonedEntityRegistry.TASTY_BONE_WOLF_ENTITY, WolfEntityRenderer::new);
+        EntityRendererRegistry.register(SummonedEntityRegistry.WONDERFUL_WHEAT_LLAMA_ENTITY, context -> new LlamaEntityRenderer(context, EntityModelLayers.TRADER_LLAMA));
     }
 }

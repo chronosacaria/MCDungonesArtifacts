@@ -116,3 +116,8 @@ fabric/run/
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
+/neoforge/run/config/fml.toml
+/neoforge/run/logs/2024-11-18-1.log.gz
+/neoforge/run/logs/debug-1.log.gz
+/fabric/src/main/generated/.cache/568c5e4d9a35bb84ede8547cc0bae61e28d0a2a7
+/fabric/src/main/generated/.cache/ced7e4a9677002f284720227b9b86a80ef5608a8

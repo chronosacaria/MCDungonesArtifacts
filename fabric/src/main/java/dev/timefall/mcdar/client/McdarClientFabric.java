@@ -1,6 +1,7 @@
 package dev.timefall.mcdar.client;
 
 import dev.timefall.mcdar.ModConstants;
+import dev.timefall.mcdar.client.registry.SummonedEntityAttributeRegistryFabric;
 import dev.timefall.mcdar.client.registry.SummonedEntityRenderRegistryFabric;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -26,8 +27,11 @@ public class McdarClientFabric implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
 
+        System.out.println("Hi Derp");
+
         //SummonedEntityRenderRegistry.register();
         SummonedEntityRenderRegistryFabric.register();
+        SummonedEntityAttributeRegistryFabric.register();
 
         // Optional Resource Pack
         FabricLoader.getInstance().getModContainer(ModConstants.MOD_ID).ifPresent(

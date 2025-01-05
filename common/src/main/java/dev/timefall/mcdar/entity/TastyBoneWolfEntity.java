@@ -38,7 +38,6 @@ public class TastyBoneWolfEntity extends WolfEntity implements Tameable, Summona
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0);
     }
 
-    //TODO Find why they be spinning
     @Override
     protected void initGoals(){
         this.goalSelector.add(1, new SwimGoal(this));

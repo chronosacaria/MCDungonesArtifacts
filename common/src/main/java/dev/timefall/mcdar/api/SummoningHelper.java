@@ -1,7 +1,7 @@
 package dev.timefall.mcdar.api;
 
 import dev.timefall.mcdar.api.interfaces.Summonable;
-import dev.timefall.mcdar.entity.SummonedEntityType;
+import dev.timefall.mcdar.registry.SummonedEntityRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -24,9 +24,9 @@ import java.util.List;
 public class SummoningHelper {
 
     public static final List<? extends EntityType<? extends SheepEntity>> SHEEP = Arrays.asList(
-            SummonedEntityType.ENCHANTED_GRASS_GREEN_SHEEP_ENTITY,
-            SummonedEntityType.ENCHANTED_GRASS_BLUE_SHEEP_ENTITY,
-            SummonedEntityType.ENCHANTED_GRASS_RED_SHEEP_ENTITY);
+            SummonedEntityRegistry.ENCHANTED_GRASS_GREEN_SHEEP_ENTITY,
+            SummonedEntityRegistry.ENCHANTED_GRASS_BLUE_SHEEP_ENTITY,
+            SummonedEntityRegistry.ENCHANTED_GRASS_RED_SHEEP_ENTITY);
 
     public static void mcdar$summonedSheepEffect(LivingEntity sheep, int effectInt) {
         switch (effectInt) {

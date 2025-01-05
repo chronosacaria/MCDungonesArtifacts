@@ -30,7 +30,7 @@ public class McdarTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ArtifactsRegistry.GOLEM_KIT.getKey())
                 .add(ArtifactsRegistry.TASTY_BONE.getKey())
                 .add(ArtifactsRegistry.WONDERFUL_WHEAT.getKey())
-                .add(ArtifactsRegistry.SATCHEL_OF_ELIXERS.getKey())
+                .add(ArtifactsRegistry.SATCHEL_OF_ELIXIRS.getKey())
                 .add(ArtifactsRegistry.SATCHEL_OF_SNACKS.getKey());
         getOrCreateTagBuilder(TagKeys.ILLAGER_ARTIFACT)
                 .add(ArtifactsRegistry.DEATH_CAP_MUSHROOM.getKey())
@@ -54,5 +54,8 @@ public class McdarTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(TagKeys.ALL_ARTIFACT)
                 .addOptionalTag(TagKeys.VILLAGER_ARTIFACT)
                 .addOptionalTag(TagKeys.ILLAGER_ARTIFACT);
+        getOrCreateTagBuilder(TagKeys.VOID_ARTIFACT)
+                .add(ArtifactsRegistry.TOME_OF_DUPLICATION.getKey());
+                //.add(ArtifactsRegistry.SHADOW_SHIFTER.getKey());
     }
 }

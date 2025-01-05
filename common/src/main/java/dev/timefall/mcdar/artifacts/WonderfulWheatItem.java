@@ -4,7 +4,7 @@ import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.artifacts.artifact_types.ArtifactSummoningItem;
 import dev.timefall.mcdar.config.McdarArtifactsStatsConfig;
 import dev.timefall.mcdar.effect.EnchantmentEffects;
-import dev.timefall.mcdar.entity.SummonedEntityType;
+import dev.timefall.mcdar.registry.SummonedEntityRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.tooltip.TooltipType;
@@ -25,7 +25,7 @@ public class WonderfulWheatItem extends ArtifactSummoningItem {
         return CleanlinessHelper.mcdar$cleanUseSummon(
                 itemUsageContext,
                 this,
-                SummonedEntityType.WONDERFUL_WHEAT_LLAMA_ENTITY,
+                SummonedEntityRegistry.WONDERFUL_WHEAT_LLAMA_ENTITY,
                 modifiedCooldownEnchantmentTime
         );
     }

@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "#mcdar:villager_artifacts",
+      "required": false
+    },
+    {
+      "id": "#mcdar:illager_artifacts",
+      "required": false
+    }
+  ]
+}

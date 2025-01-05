@@ -14,6 +14,16 @@ public class ArtifactsRegistry {
 
     private static final Registrar<Item> ITEM = ConfigApiJava.platform().createRegistrar(ModConstants.MOD_ID, Registries.ITEM);
 
+    //Corrupted Beacon
+    //Corrupted Pumpkin
+    //Ice Wand          - Mob
+    //Scatter Mines     - Mob
+    //Shadow Shifter    - Use shadow from lib
+    //Soul Lantern      - Mob
+    //Totem of Casting  - Status Effect, AOE cloud
+    //Vexing Chant      - Mob
+    //Void Quiver       - Pull Void Shot from MCDW -> MCDX -> MCDAR
+
     // Illager Artifacts
     public static final RegistrySupplier<Item> DEATH_CAP_MUSHROOM         = registerArtifacts("death_cap_mushroom",  new DeathCapMushroomItem());
     public static final RegistrySupplier<Item> BLAST_FUNGUS               = registerArtifacts("blast_fungus",  new BlastFungusItem());
@@ -48,7 +58,10 @@ public class ArtifactsRegistry {
     public static final RegistrySupplier<Item> TASTY_BONE                 = registerArtifacts("tasty_bone",  new TastyBoneItem());
     public static final RegistrySupplier<Item> WONDERFUL_WHEAT            = registerArtifacts("wonderful_wheat",  new WonderfulWheatItem());
     public static final RegistrySupplier<Item> SATCHEL_OF_SNACKS          = registerArtifacts("satchel_of_snacks", new SatchelOfSnacksItem());
-    public static final RegistrySupplier<Item> SATCHEL_OF_ELIXERS         = registerArtifacts("satchel_of_elixers", new SatchelOfElixirsItem());
+    public static final RegistrySupplier<Item> SATCHEL_OF_ELIXIRS         = registerArtifacts("satchel_of_elixirs", new SatchelOfElixirsItem());
+
+    // Void Artifacts
+    public static final RegistrySupplier<Item> TOME_OF_DUPLICATION         = registerArtifacts("tome_of_duplications", new TomeOfDuplicationItem());
 
     protected static RegistrySupplier<Item> registerArtifacts(String id, Item item) {
         return ITEM.register(id, () -> item);

@@ -67,4 +67,12 @@ public class AbilityHelper {
             Items.APPLE, Items.BREAD, Items.COOKED_SALMON, Items.COOKED_PORKCHOP, Items.COOKED_MUTTON,
             Items.COOKED_COD, Items.COOKED_COD, Items.COOKED_RABBIT, Items.COOKED_CHICKEN, Items.COOKED_BEEF,
             Items.MELON_SLICE, Items.CARROT, Items.GOLDEN_CARROT, Items.GOLDEN_APPLE, Items.BAKED_POTATO));
+
+    public static final List<Item> TOME_OF_DUPLICATION_LIST = Collections.unmodifiableList(Arrays.asList(
+            Items.APPLE, Items.BREAD, Items.COOKED_SALMON, Items.COOKED_PORKCHOP, Items.COOKED_MUTTON,
+            Items.COOKED_COD, Items.COOKED_COD, Items.COOKED_RABBIT, Items.COOKED_CHICKEN, Items.COOKED_BEEF,
+            Items.MELON_SLICE, Items.CARROT, Items.GOLDEN_CARROT, Items.GOLDEN_APPLE, Items.BAKED_POTATO, Items.TNT,
+            PotionContentsComponent.createStack(Items.POTION, Potions.STRENGTH).getItem(),
+            PotionContentsComponent.createStack(Items.POTION, Potions.SWIFTNESS).getItem(),
+            PotionContentsComponent.createStack(Items.POTION, Potions.INVISIBILITY).getItem()));
 }

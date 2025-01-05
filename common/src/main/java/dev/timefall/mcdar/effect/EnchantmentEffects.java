@@ -5,6 +5,7 @@ import dev.timefall.mcdar.api.AOEHelper;
 import dev.timefall.mcdar.api.AbilityHelper;
 import dev.timefall.mcdar.api.CleanlinessHelper;
 import dev.timefall.mcdar.registry.EnchantmentRegistry;
+import me.fzzyhmstrs.fzzy_config.api.ConfigApiJava;
 import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -103,9 +104,11 @@ public class EnchantmentEffects {
 
     public static void mcdar$cooldownHelper(PlayerEntity player, Item item, int maxCooldown) {
         int cooldownLevel = EnchantmentEffects.getLevel(EnchantmentRegistry.COOLDOWN, player, player.getWorld());
-        player.getItemCooldownManager().set(item,
-                cooldownLevel == 0 ? maxCooldown :
-                        (int) (maxCooldown - (maxCooldown * EnchantmentEffects.mcdar$cooldownCalcHelper(cooldownLevel))));
+        if (!(ConfigApiJava.platform().isDev() && player.isCreative())) {
+            player.getItemCooldownManager().set(item,
+                    cooldownLevel == 0 ? maxCooldown :
+                            (int) (maxCooldown - (maxCooldown * EnchantmentEffects.mcdar$cooldownCalcHelper(cooldownLevel))));
+        }
     }
 
     public static float mcdar$cooldownCalcHelper(int level) {

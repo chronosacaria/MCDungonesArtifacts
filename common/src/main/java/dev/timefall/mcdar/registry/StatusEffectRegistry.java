@@ -16,19 +16,14 @@ public class StatusEffectRegistry {
 
     private static final Registrar<StatusEffect> STATUS_EFFECT = ConfigApiJava.platform().createRegistrar(ModConstants.MOD_ID, Registries.STATUS_EFFECT);
 
-    public static RegistrySupplier<StatusEffect> CHARMED;
-    public static RegistrySupplier<StatusEffect> SHIELDING;
-    public static RegistrySupplier<StatusEffect> SOUL_PROTECTION;
-    public static RegistrySupplier<StatusEffect> STUNNED;
+    public static RegistrySupplier<StatusEffect> CHARMED         = registerStatus("charmed", new CharmedStatusEffect(StatusEffectCategory.HARMFUL, 0xC7005B));
+    public static RegistrySupplier<StatusEffect> SHIELDING       = registerStatus("shielding", new ShieldingStatusEffect(StatusEffectCategory.BENEFICIAL, 0x808080));
+    public static RegistrySupplier<StatusEffect> SOUL_PROTECTION = registerStatus("soul_protection", new SoulProtectionStatusEffect(StatusEffectCategory.BENEFICIAL, 0x2552a5));
+    public static RegistrySupplier<StatusEffect> STUNNED         = registerStatus("stunned", new StunnedStatusEffect(StatusEffectCategory.HARMFUL, 0xFFFF00));
 
     protected static RegistrySupplier<StatusEffect> registerStatus(String id, StatusEffect statusEffect) {
         return STATUS_EFFECT.register(id, () -> statusEffect);
     }
 
-    public static void register() {
-        CHARMED = registerStatus("charmed", new CharmedStatusEffect(StatusEffectCategory.HARMFUL, 0xC7005B));
-        SHIELDING = registerStatus("shielding", new ShieldingStatusEffect(StatusEffectCategory.BENEFICIAL, 0x808080));
-        SOUL_PROTECTION = registerStatus("soul_protection", new SoulProtectionStatusEffect(StatusEffectCategory.BENEFICIAL, 0x2552a5));
-        STUNNED = registerStatus("stunned", new StunnedStatusEffect(StatusEffectCategory.HARMFUL, 0xFFFF00));
-    }
+    public static void register() {}
 }

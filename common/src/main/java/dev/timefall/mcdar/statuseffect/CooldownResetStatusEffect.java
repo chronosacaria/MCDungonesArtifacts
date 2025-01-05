@@ -11,10 +11,11 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.mob.MobEntity;
 
-public class CharmedStatusEffect extends StatusEffect {
+public class CooldownResetStatusEffect extends StatusEffect {
+    //TODO get mixin to grab this properly from the call sites
     private LivingEntity entity;
 
-    public CharmedStatusEffect(StatusEffectCategory statusEffectCategory, int color) {
+    public CooldownResetStatusEffect(StatusEffectCategory statusEffectCategory, int color) {
         super(statusEffectCategory, color);
     }
 

@@ -7,7 +7,6 @@ public class ShieldingStatusEffect extends StatusEffect {
 
     public ShieldingStatusEffect(StatusEffectCategory type, int color) {
         super(type, color);
-        //Registry.register(Registries.STATUS_EFFECT, Identifier.of(ModConstants.MOD_ID, id), this);
     }
 
     @Override

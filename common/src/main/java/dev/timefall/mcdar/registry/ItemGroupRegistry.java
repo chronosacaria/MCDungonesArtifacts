@@ -27,17 +27,22 @@ public class ItemGroupRegistry {
                     // DAMAGING ARTEFACTS
                     entries.add(ArtifactsRegistry.BLAST_FUNGUS.get());
                     //entries.add(ArtifactsRegistry.CORRUPTED_BEACON.get());
+                    //entries.add(ArtifactsRegistry.CORRUPTED_PUMPKIN.get());
                     entries.add(ArtifactsRegistry.HARVESTER.get());
                     entries.add(ArtifactsRegistry.LIGHTNING_ROD.get());
                     entries.add(ArtifactsRegistry.POWERSHAKER.get());
+                    //entries.add(ArtifactsRegistry.SCATTER_MINES.get()); summon three mines that boom on contact (creeper landmine). dim -> bright and boom
                     entries.add(ArtifactsRegistry.UPDRAFT_TOME.get());
 
                     // DEFENSIVE ARTEFACTS
                     entries.add(ArtifactsRegistry.ENCHANTERS_TOME.get());
                     entries.add(ArtifactsRegistry.IRON_HIDE_AMULET.get());
-                    entries.add(ArtifactsRegistry.SATCHEL_OF_ELIXERS.get());
+                    entries.add(ArtifactsRegistry.SATCHEL_OF_ELIXIRS.get());
                     entries.add(ArtifactsRegistry.SATCHEL_OF_SNACKS.get());
+                    //entries.add(ArtifactsRegistry.SHADOW_SHIFTER.get()); Grants Shadow Step
                     entries.add(ArtifactsRegistry.SOUL_HEALER.get());
+                    entries.add(ArtifactsRegistry.TOME_OF_DUPLICATION.get());
+                    //entries.add(ArtifactsRegistry.TOTEM_OF_CASTING.get()); Makes aura cloud that Resets artifact cooldown
                     entries.add(ArtifactsRegistry.TOTEM_OF_REGENERATION.get());
                     entries.add(ArtifactsRegistry.TOTEM_OF_SHIELDING.get());
                     entries.add(ArtifactsRegistry.TOTEM_OF_SOUL_PROTECTION.get());
@@ -48,11 +53,12 @@ public class ItemGroupRegistry {
                     entries.add(ArtifactsRegistry.HARPOON_QUIVER.get());
                     entries.add(ArtifactsRegistry.THUNDERING_QUIVER.get());
                     entries.add(ArtifactsRegistry.TORMENT_QUIVER.get());
-
+                    //entries.add(ArtifactsRegistry.VOID_QUIVER.get()); temporarily gives void strike
 
                     // STATUS INFLICTING ARTEFACTS
                     entries.add(ArtifactsRegistry.CORRUPTED_SEEDS.get());
                     entries.add(ArtifactsRegistry.GONG_OF_WEAKENING.get());
+                    //entries.add(ArtifactsRegistry.ICE_WAND.get()); Summons Ice Blocks above player, when blocks fall, player is stunned
                     entries.add(ArtifactsRegistry.LOVE_MEDALLION.get());
                     entries.add(ArtifactsRegistry.SATCHEL_OF_ELEMENTS.get());
                     entries.add(ArtifactsRegistry.SHOCK_POWDER.get());
@@ -61,7 +67,9 @@ public class ItemGroupRegistry {
                     entries.add(ArtifactsRegistry.BUZZY_NEST.get());
                     entries.add(ArtifactsRegistry.ENCHANTED_GRASS.get());
                     entries.add(ArtifactsRegistry.GOLEM_KIT.get());
+                    //entries.add(ArtifactsRegistry.SOUL_LANTERN.get()); Summons Soul Wizard
                     entries.add(ArtifactsRegistry.TASTY_BONE.get());
+                    //entries.add(ArtifactsRegistry.VEXING_CHANT.get()); Summons three (3) Guardian Vexes
                     entries.add(ArtifactsRegistry.WONDERFUL_WHEAT.get());
                 })
                 .build());

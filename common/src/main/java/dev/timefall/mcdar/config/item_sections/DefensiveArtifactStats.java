@@ -46,12 +46,23 @@ public class DefensiveArtifactStats extends ConfigSection {
         );
         this.SOUL_HEALER_STATS = new ExperienceDrainingArtifactStats(
                 20,
-                12,
+                0,
                 0.2f,
                 true,
                 true,
                 64,
                 60,
+                2,
+                1
+        );
+        this.TOME_OF_DUPLICATION_STATS = new ExperienceDrainingArtifactStats(
+                40,
+                12,
+                0f,
+                true,
+                true,
+                64,
+                120,
                 2,
                 1
         );
@@ -109,6 +120,7 @@ public class DefensiveArtifactStats extends ConfigSection {
     public ArtifactStats SATCHEL_OF_ELIXIRS_STATS;
     public ArtifactStats SATCHEL_OF_SNACKS_STATS;
     public ExperienceDrainingArtifactStats SOUL_HEALER_STATS;
+    public ExperienceDrainingArtifactStats TOME_OF_DUPLICATION_STATS;
     public StatusCloudCreatingArtifactStats TOTEM_OF_REGENERATION_STATS;
     public StatusCloudCreatingArtifactStats TOTEM_OF_SHIELDING_STATS;
     public StatusCloudCreatingArtifactStats TOTEM_OF_SOUL_PROTECTION_STATS;

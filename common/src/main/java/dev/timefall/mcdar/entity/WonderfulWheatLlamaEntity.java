@@ -33,14 +33,13 @@ public class WonderfulWheatLlamaEntity extends TraderLlamaEntity implements Tame
     }
 
     @Override
-    protected void initGoals(){
-
+    protected void initGoals() {
         this.goalSelector.add(6, new FollowSummonerGoal<>(this, 1.0,
                 this.getNavigation(), 90.0F, 3.0F));
         this.initCustomGoals();
     }
 
-    protected void initCustomGoals(){
+    protected void initCustomGoals() {
         this.goalSelector.add(3, new ProjectileAttackGoal(this, 1.25D, 40, 20.0F));
         this.targetSelector.add(2, new RevengeGoal(this));
     }
@@ -66,7 +65,7 @@ public class WonderfulWheatLlamaEntity extends TraderLlamaEntity implements Tame
     }
 
     @Override
-    public void setAttacker(LivingEntity attacker){
+    public void setAttacker(LivingEntity attacker) {
         if (attacker != null && !attacker.equals(getOwner()))
             super.setAttacker(attacker);
     }
@@ -83,4 +82,8 @@ public class WonderfulWheatLlamaEntity extends TraderLlamaEntity implements Tame
         return ownerEntityUUID;
     }
 
+    @Override
+    public Variant getVariant() {
+        return Variant.BROWN;
+    }
 }
